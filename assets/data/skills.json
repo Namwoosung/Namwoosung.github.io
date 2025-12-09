@@ -1,0 +1,49 @@
+{
+  "skills": {
+    "languages": [
+      { "name": "Java", "level": "primary" },
+      { "name": "Python", "level": "primary" },
+      { "name": "C++", "level": "primary" },
+      { "name": "C", "level": "secondary" },
+      { "name": "JavaScript", "level": "secondary" },
+      { "name": "Kotlin", "level": "secondary" }
+    ],
+    "backend": [
+      { "name": "Spring", "level": "primary" },
+      { "name": "Spring Boot", "level": "primary" },
+      { "name": "JDBC", "level": "primary" },
+      { "name": "JPA", "level": "primary" },
+      { "name": "Spring Data JPA", "level": "primary" },
+      { "name": "QueryDsl", "level": "primary" },
+      { "name": "JSP", "level": "secondary" },
+      { "name": "AWS Lambda", "level": "secondary" },
+      { "name": "Node.js", "level": "secondary" },
+      { "name": "FastAPI", "level": "secondary" }
+    ],
+    "database": [
+      { "name": "MySQL", "level": "primary" },
+      { "name": "MariaDB", "level": "primary" },
+      { "name": "ElasticSearch", "level": "primary" },
+      { "name": "H2", "level": "secondary" },
+      { "name": "DynamoDB", "level": "secondary" }
+    ],
+    "devops": [
+      { "name": "Git", "level": "primary" },
+      { "name": "Docker", "level": "primary" },
+      { "name": "AWS", "level": "secondary" },
+      { "name": "Azure", "level": "secondary" },
+      { "name": "Netlify", "level": "secondary" }
+    ],
+    "collaboration": [
+      { "name": "Notion", "level": "primary" },
+      { "name": "Slack", "level": "primary" },
+      { "name": "Jandi", "level": "secondary" },
+      { "name": "Jira", "level": "secondary" }
+    ],
+    "os": [
+      { "name": "Linux", "level": "primary" },
+      { "name": "Mac", "level": "primary" },
+      { "name": "Windows", "level": "primary" }
+    ]
+  }
+}

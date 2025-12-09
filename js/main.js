@@ -1,0 +1,421 @@
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener("click", function (e) {
+    e.preventDefault();
+    const href = this.getAttribute("href");
+
+    // Main 클릭 시 최상단으로 스크롤
+    if (href === "#main") {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+      return;
+    }
+
+    const target = document.querySelector(href);
+    if (target) {
+      // Tech Stack 섹션의 경우 헤더 높이만큼 오프셋 추가
+      if (href === "#tech") {
+        const headerHeight = document.querySelector(".header").offsetHeight;
+        const targetPosition = target.offsetTop - headerHeight - 20; // 20px 추가 여백
+
+        window.scrollTo({
+          top: targetPosition,
+          behavior: "smooth",
+        });
+      } else {
+        target.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }
+  });
+});
+
+// Scroll reveal animation
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: "0px 0px -50px 0px",
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("revealed");
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll(".scroll-reveal").forEach((el) => {
+  observer.observe(el);
+});
+
+// Header background on scroll
+window.addEventListener("scroll", () => {
+  const header = document.querySelector(".header");
+  if (window.scrollY > 100) {
+    header.style.background = "rgba(30, 30, 30, 0.98)";
+    header.style.boxShadow = "0 2px 25px rgba(0, 0, 0, 0.3)";
+  } else {
+    header.style.background = "rgba(30, 30, 30, 0.95)";
+    header.style.boxShadow = "0 2px 20px rgba(0, 0, 0, 0.2)";
+  }
+});
+
+// Add loading animation
+window.addEventListener("load", () => {
+  document.body.classList.add("loaded");
+});
+
+// Typing animation for hero text (optional enhancement)
+function typeWriter(element, text, speed = 100) {
+  let i = 0;
+  element.innerHTML = "";
+
+  function type() {
+    if (i < text.length) {
+      element.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(type, speed);
+    }
+  }
+
+  type();
+}
+
+// Parallax effect for background image
+let ticking = false;
+
+function updateParallax() {
+  const scrolled = window.pageYOffset;
+  const body = document.body;
+
+  // 배경 이미지가 스크롤에 따라 천천히 움직이도록 설정
+  const parallaxSpeed = 0.3;
+  const yPos = -(scrolled * parallaxSpeed);
+  body.style.backgroundPosition = `center ${yPos}px`;
+
+  ticking = false;
+}
+
+window.addEventListener("scroll", () => {
+  if (!ticking) {
+    requestAnimationFrame(updateParallax);
+    ticking = true;
+  }
+});
+
+// Project modal functionality
+let projectsData = [];
+
+async function openProjectModal(projectId) {
+  if (projectsData.length === 0) {
+    projectsData = await loadProjectsData();
+  }
+
+  const project = projectsData.find((p) => p.id === projectId);
+  if (!project) return;
+
+  const modal = document.createElement("div");
+  modal.className = "project-modal";
+  modal.innerHTML = `
+        <div class="modal-overlay" onclick="closeProjectModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>${project.title}</h2>
+                <button class="modal-close" onclick="closeProjectModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="project-info">
+                    <div class="project-meta">
+                        <span class="meta-item">
+                            <strong>기간:</strong> ${project.period}
+                        </span>
+                        <span class="meta-item">
+                            <strong>팀:</strong> ${project.team}
+                        </span>
+                    </div>
+                    <p class="project-description">${project.description}</p>
+                </div>
+                
+                <div class="project-sections">
+                    ${project.sections
+                      .map(
+                        (section) => `
+                        <div class="project-section">
+                            <h3>${section.title}</h3>
+                            <div class="section-content">${section.content}</div>
+                        </div>
+                    `
+                      )
+                      .join("")}
+                </div>
+                
+                <div class="project-technologies">
+                    <h3>사용 기술</h3>
+                    <div class="tech-list">
+                        ${project.technologies
+                          .map(
+                            (tech) =>
+                              `<span class="tech-item ${tech.level}">${tech.name}</span>`
+                          )
+                          .join("")}
+                    </div>
+                </div>
+                
+                <div class="project-links">
+                    <h3>관련 링크</h3>
+                    <div class="links-list">
+                        ${project.links
+                          .map(
+                            (link) =>
+                              `<a href="${link.url}" class="project-link" target="_blank">${link.name}</a>`
+                          )
+                          .join("")}
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+
+  document.body.appendChild(modal);
+  document.body.style.overflow = "hidden";
+
+  // Animate modal
+  setTimeout(() => {
+    modal.classList.add("show");
+  }, 10);
+}
+
+function closeProjectModal() {
+  const modal = document.querySelector(".project-modal");
+  if (modal) {
+    modal.classList.remove("show");
+    setTimeout(() => {
+      document.body.removeChild(modal);
+      document.body.style.overflow = "";
+    }, 300);
+  }
+}
+
+// Data loading functions
+async function loadProjectsData() {
+  try {
+    const response = await fetch("assets/data/projects.json");
+    const data = await response.json();
+    return data.projects;
+  } catch (error) {
+    console.error("Error loading projects data:", error);
+    return [];
+  }
+}
+
+async function loadSkillsData() {
+  try {
+    const response = await fetch("assets/data/skills.json");
+    const data = await response.json();
+    return data.skills;
+  } catch (error) {
+    console.error("Error loading skills data:", error);
+    return {};
+  }
+}
+
+async function loadExperienceData() {
+  try {
+    const response = await fetch("assets/data/experience.json");
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error loading experience data:", error);
+    return {};
+  }
+}
+
+// Dynamic content rendering functions
+function renderProjects(projects) {
+  const projectsContainer = document.querySelector(".projects-grid");
+  if (!projectsContainer) return;
+
+  projectsContainer.innerHTML = projects
+    .map(
+      (project) => `
+        <div class="project-card scroll-reveal" onclick="openProjectModal('${
+          project.id
+        }')">
+            <div class="project-content">
+                <h3 class="project-title">${project.title}</h3>
+                <div class="project-meta">
+                    <span class="project-period">${project.period}</span>
+                    <span class="project-team">${project.team}</span>
+                </div>
+                <p class="project-description">${project.description}</p>
+                <div class="project-tech-preview">
+                    ${project.technologies
+                      .slice(0, 4)
+                      .map(
+                        (tech) =>
+                          `<span class="tech-tag ${tech.level}">${tech.name}</span>`
+                      )
+                      .join("")}
+                    ${
+                      project.technologies.length > 4
+                        ? `<span class="tech-tag more">+${
+                            project.technologies.length - 4
+                          }</span>`
+                        : ""
+                    }
+                </div>
+                <div class="project-footer">
+                    <span class="view-details">자세히 보기 →</span>
+                </div>
+            </div>
+        </div>
+    `
+    )
+    .join("");
+}
+
+function renderSkills(skills) {
+  const skillsContainer = document.querySelector(".tech-categories");
+  if (!skillsContainer) return;
+
+  skillsContainer.innerHTML = Object.entries(skills)
+    .map(
+      ([category, items]) => `
+        <div class="tech-category scroll-reveal">
+            <h3>${getCategoryTitle(category)}</h3>
+            <div class="tech-list">
+                ${items
+                  .map(
+                    (item) =>
+                      `<span class="tech-item ${item.level}">${item.name}</span>`
+                  )
+                  .join("")}
+            </div>
+        </div>
+    `
+    )
+    .join("");
+}
+
+function getCategoryTitle(category) {
+  const titles = {
+    languages: "Language",
+    backend: "Backend",
+    database: "DBMS",
+    devops: "DevOps",
+    collaboration: "Communication",
+    os: "OS",
+  };
+  return titles[category] || category;
+}
+
+function renderEducation(education) {
+  const educationContainer = document.querySelector(".education-list");
+  if (!educationContainer) return;
+
+  educationContainer.innerHTML = education
+    .map(
+      (edu) => `
+        <div class="edu-item">
+          <div class="edu-title">${edu.title}</div>
+          <div class="edu-period">${edu.period}</div>
+          <p>${edu.description}</p>
+          ${edu.grade ? `<div class="edu-grade">학점: ${edu.grade}</div>` : ""}
+        </div>
+      `
+    )
+    .join("");
+}
+
+// Hero sequential animation
+function initHeroAnimations() {
+  const heroElements = document.querySelectorAll(".hero-animate");
+
+  // Add animate class to trigger animations
+  heroElements.forEach((element) => {
+    element.classList.add("animate");
+  });
+}
+
+// Image slider functionality
+function initImageSlider() {
+  const slideImages = document.querySelectorAll('.slide-image');
+  let currentIndex = 0;
+  
+  function updateSlidePositions() {
+    slideImages.forEach((img, index) => {
+      // Remove all position classes
+      img.classList.remove('current', 'next', 'prev', 'hidden', 'sliding-out', 'sliding-in');
+      
+      // Calculate relative position
+      const relativeIndex = (index - currentIndex + slideImages.length) % slideImages.length;
+      
+      // Apply appropriate class based on position
+      if (relativeIndex === 0) {
+        img.classList.add('current');
+      } else if (relativeIndex === 1) {
+        img.classList.add('next');
+      } else {
+        // Hide the third image completely to avoid showing it on the right
+        img.classList.add('hidden');
+      }
+    });
+  }
+  
+  function slideToNext() {
+    const currentImage = slideImages[currentIndex];
+    const nextIndex = (currentIndex + 1) % slideImages.length;
+    const nextImage = slideImages[nextIndex];
+    
+    // Set up sliding animation
+    currentImage.classList.remove('current');
+    currentImage.classList.add('sliding-out');
+    
+    nextImage.classList.remove('next');
+    nextImage.classList.add('sliding-in');
+    
+    // After animation completes, update positions
+    setTimeout(() => {
+      currentIndex = nextIndex;
+      updateSlidePositions();
+    }, 1000); // Match CSS transition duration
+  }
+  
+  // Initialize slider
+  updateSlidePositions();
+  
+  // Start auto-slide (change every 3 seconds)
+  setInterval(slideToNext, 3000);
+}
+
+// Initialize all interactive elements
+document.addEventListener("DOMContentLoaded", async () => {
+  // Start hero animations after a short delay
+  setTimeout(() => {
+    initHeroAnimations();
+  }, 300);
+
+  // Initialize image slider
+  initImageSlider();
+
+  // Load and render dynamic content
+  const [projects, skills, experience] = await Promise.all([
+    loadProjectsData(),
+    loadSkillsData(),
+    loadExperienceData(),
+  ]);
+
+  // Render dynamic content
+  renderProjects(projects);
+  renderSkills(skills);
+  renderEducation(experience.education || []);
+
+  // Re-initialize scroll reveal for dynamically loaded content
+  document.querySelectorAll(".scroll-reveal").forEach((el) => {
+    observer.observe(el);
+  });
+});

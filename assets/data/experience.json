@@ -1,0 +1,33 @@
+{
+  "education": [
+    {
+      "title": "경희대학교",
+      "period": "2019.03 - 2025.08",
+      "description": "컴퓨터공학과 학사",
+      "grade": "4.18/4.5"
+    },
+    {
+      "title": "삼성 청년 SW 아카데미 (SSAFY)",
+      "period": "2025.07 - ",
+      "description": "Web 개발 트랙"
+    }
+  ],
+  "certifications": [
+    {
+      "title": "SQLD (SQL 개발자)",
+      "date": "2025.04"
+    },
+    {
+      "title": "OPIc Intermediate Mid1",
+      "date": "2023.05"
+    },
+    {
+      "title": "삼성 SW 역량 테스트 B형",
+      "date": "2025.08"
+    },
+    {
+      "title": "정보처리기사",
+      "date": "2023.09"
+    }
+  ]
+}

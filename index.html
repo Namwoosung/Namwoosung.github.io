@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>남우성 | 포트폴리오</title>
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <nav class="nav container">
+        <div class="logo">🌲 namuTree</div>
+        <ul class="nav-links">
+          <li><a href="#main">Main</a></li>
+          <li><a href="#tech">Tech Stack</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#education">Education</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="main" class="hero">
+      <div class="container">
+        <div class="about-content">
+          <div class="about-left">
+            <div class="about-image hero-animate hero-image">
+              <div class="image-slider">
+                <img
+                  src="images/me1.jpeg"
+                  alt="프로필 사진 1"
+                  class="slide-image active"
+                />
+                <img
+                  src="images/me2.jpeg"
+                  alt="프로필 사진 2"
+                  class="slide-image"
+                />
+                <img
+                  src="images/me3.jpeg"
+                  alt="프로필 사진 3"
+                  class="slide-image"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="about-right">
+            <div class="about-text">
+              <h2 class="hero-animate hero-greeting">안녕하세요!</h2>
+              <h3 class="about-title hero-animate hero-title">
+                백엔드 개발자 <span class="highlight-name">남우성</span>입니다.
+              </h3>
+              <p class="about-description hero-animate hero-description">
+                사용자 가치를 최우선으로 여기며 깊이 있는 고민을 통해 더 나은
+                방향을 끊임없이 탐색하는 것을 추구합니다.
+              </p>
+              <div class="core-values">
+                <span class="value-tag hero-animate hero-tag" data-delay="0"
+                  >성실</span
+                >
+                <span class="value-tag hero-animate hero-tag" data-delay="100"
+                  >책임</span
+                >
+                <span class="value-tag hero-animate hero-tag" data-delay="200"
+                  >협업</span
+                >
+                <span class="value-tag hero-animate hero-tag" data-delay="300"
+                  >기여</span
+                >
+                <span class="value-tag hero-animate hero-tag" data-delay="400"
+                  >헌신</span
+                >
+                <span class="value-tag hero-animate hero-tag" data-delay="500"
+                  >성장</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="see-more">
+          <a href="#tech" class="see-more-link">
+            <span class="see-more-text">See More</span>
+            <span class="see-more-arrow">↓</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section id="tech" class="section">
+      <div class="container">
+        <h2 class="section-title scroll-reveal">기술 스택</h2>
+        <div class="tech-categories">
+          <!-- Tech categories will be loaded dynamically from JSON -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" class="section projects">
+      <div class="container">
+        <h2 class="section-title scroll-reveal">프로젝트</h2>
+        <div class="projects-grid">
+          <!-- Projects will be loaded dynamically from JSON -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Education & Certifications -->
+    <section id="education" class="section">
+      <div class="container">
+        <h2 class="section-title scroll-reveal">교육 및 자격증</h2>
+        <div class="education-cert">
+          <div class="education scroll-reveal">
+            <h3>교육</h3>
+            <div class="education-list">
+              <!-- Education items will be dynamically loaded here -->
+            </div>
+          </div>
+          <div class="certifications scroll-reveal">
+            <h3>자격증</h3>
+            <div class="cert-item">
+              <div class="cert-title">SQLD (SQL 개발자)</div>
+              <div class="cert-date">2025.04</div>
+            </div>
+            <div class="cert-item">
+              <div class="cert-title">OPIc Intermediate Mid 1</div>
+              <div class="cert-date">2025.05</div>
+            </div>
+            <div class="cert-item">
+              <div class="cert-title">삼성 SW 역량 테스트 B형</div>
+              <div class="cert-date">2025.08</div>
+            </div>
+            <div class="cert-item">
+              <div class="cert-title">정보처리기사</div>
+              <div class="cert-date">2025.09</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section contact">
+      <div class="container">
+        <div class="contact-content scroll-reveal">
+          <h2>Contact</h2>
+          <p>
+            고객을 위한 가치를 함께 만들어 가고 싶습니다.<br />
+            궁금한 점이 있으시면 언제든 편하게 연락주시기 바랍니다. <br />
+            감사합니다.
+          </p>
+          <div class="contact-links">
+            <div class="contact-item">
+              <a href="mailto:namws0023@gmail.com" class="contact-link">
+                <span>📧</span>
+                <span>이메일</span>
+              </a>
+              <div class="contact-detail">namws0023@gmail.com</div>
+            </div>
+            <div class="contact-item">
+              <a href="tel:010-8478-3925" class="contact-link">
+                <span>📱</span>
+                <span>전화번호</span>
+              </a>
+              <div class="contact-detail">010-8478-3925</div>
+            </div>
+            <a
+              href="https://github.com/Namwoosung"
+              class="contact-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>💻</span>
+              <span>GitHub</span>
+            </a>
+            <a
+              href="https://velog.io/@namutree"
+              class="contact-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span>📝</span>
+              <span>Tech Blog</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <p>&copy; 2024 Backend Developer Portfolio. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>
