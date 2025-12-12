@@ -3,156 +3,194 @@
     {
       "id": "facticle",
       "title": "Facticle",
-      "period": "2023.06 - 2023.08",
-      "team": "팀 프로젝트 (3명)",
-      "description": "생성형 AI 기반 뉴스 점수화 플랫폼",
+      "period": "2024.04 - 2024.12",
+      "team": "팀 프로젝트 (2명)",
+      "description": "생성형 AI 기반 뉴스 신뢰도 분석 및 요약 플랫폼",
       "technologies": [
-        { "name": "Python", "level": "primary" },
-        { "name": "FastAPI", "level": "primary" },
-        { "name": "PostgreSQL", "level": "primary" },
-        { "name": "Redis", "level": "secondary" },
-        { "name": "AWS", "level": "secondary" }
+        { "name": "Spring Boot", "level": "primary" },
+        { "name": "React", "level": "primary" },
+        { "name": "MySQL", "level": "primary" },
+        { "name": "Azure", "level": "primary" },
+        { "name": "Docker", "level": "primary" },
+        { "name": "Python", "level": "secondary" },
+        { "name": "OpenAI GPT", "level": "secondary" },
+        { "name": "ElasticSearch", "level": "secondary" }
       ],
       "sections": [
         {
           "title": "프로젝트 개요",
-          "content": "사용자들이 뉴스의 진위를 검증하고 평가할 수 있는 크라우드소싱 플랫폼을 개발했습니다. AI 기반 자동 팩트체킹과 사용자 평가를 결합한 하이브리드 검증 시스템을 구현했습니다."
+          "content": "Facticle은 뉴스 기사의 핵심 내용을 자동으로 요약하고 사실성을 분석하여 신뢰도를 평가하는 플랫폼이다. 생성형 AI 기반 요약, 사용자 평가 데이터, 자동 수집된 뉴스 데이터를 결합해 객관적인 뉴스 판단 근거를 제공한다."
         },
         {
           "title": "주요 기능",
-          "content": "• 뉴스 기사 자동 수집 및 분석<br>• 사용자 기반 팩트체킹 및 평가<br>• 신뢰도 점수 계산 알고리즘<br>• 실시간 알림 및 대시보드"
+          "content": "뉴스 자동 수집, AI 요약 및 사실성 분석, 신뢰도 점수 산출 알고리즘, ElasticSearch 기반 뉴스 검색, JWT 인증 및 사용자 관심 뉴스 관리 기능을 제공한다."
         },
         {
           "title": "담당 역할",
-          "content": "백엔드 API 개발, 데이터베이스 설계, AI 모델 연동, 신뢰도 계산 알고리즘 구현을 담당했습니다."
-        }
-      ],
-      "links": [
-        { "name": "GitHub", "url": "#" },
-        { "name": "논문", "url": "#" }
-      ]
-    },
-    {
-      "id": "murt",
-      "title": "murt",
-      "period": "2023.09 - 2023.12",
-      "team": "개인 프로젝트",
-      "description": "마이크로서비스 아키텍처 기반의 실시간 채팅 및 협업 플랫폼",
-      "technologies": [
-        { "name": "Java", "level": "primary" },
-        { "name": "Spring Boot", "level": "primary" },
-        { "name": "WebSocket", "level": "primary" },
-        { "name": "ElasticSearch", "level": "primary" },
-        { "name": "Docker", "level": "secondary" }
-      ],
-      "sections": [
-        {
-          "title": "프로젝트 개요",
-          "content": "실시간 채팅과 파일 공유가 가능한 팀 협업 플랫폼을 마이크로서비스 아키텍처로 설계하여 개발했습니다. 높은 동시 접속자 수를 처리할 수 있는 확장 가능한 시스템을 구축했습니다."
-        },
-        {
-          "title": "주요 기능",
-          "content": "• 실시간 채팅 (WebSocket)<br>• 파일 업로드 및 공유<br>• 사용자 인증 및 권한 관리<br>• 메시지 검색 및 히스토리"
+          "content": "백엔드 아키텍처 설계, Spring Boot 기반 API 개발, OpenAI 기반 요약 및 분석 엔진 개발, Fact-Score 알고리즘 설계, Python 뉴스 크롤러 개발, ElasticSearch 검색 기능 구축, Docker 기반 배포 환경 구성 등을 담당하였다."
         },
         {
           "title": "기술적 성과",
-          "content": "마이크로서비스 간 통신 최적화로 응답 시간 30% 단축, ElasticSearch를 활용한 실시간 검색 기능 구현으로 사용자 경험 향상"
+          "content": "AI 요약 품질 개선을 통해 불필요 문장 생성률 약 30% 감소, 검색 속도 10~18배 향상, 대량 뉴스 데이터 처리 가능한 자동 수집 파이프라인 구축, Fact-Score 알고리즘을 통한 일관성 있는 신뢰도 산출 구조 확립 등의 성과를 얻었다."
         }
       ],
+      "images": [
+        {
+          "path": "images/projects/facticle/main.png",
+          "alt": "Facticle 메인 화면",
+          "caption": "메인 화면"
+        }
+      ],
+      "files": [],
       "links": [
-        { "name": "GitHub", "url": "#" },
-        { "name": "API 문서", "url": "#" }
+        { "name": "GitHub", "url": "https://github.com/Namwoosung/Facticle" }
       ]
     },
     {
       "id": "unus",
-      "title": "unus",
-      "period": "2023.03 - 2023.05",
-      "team": "개인 프로젝트",
-      "description": "통합 사용자 관리 및 인증 시스템",
+      "title": "UNUS",
+      "period": "2025.03 - 2025.04",
+      "team": "팀 프로젝트 (6명)",
+      "description": "대학생 맞춤 진로 및 공모전 추천 + 커뮤니티 연결 플랫폼",
       "technologies": [
-        { "name": "Java", "level": "primary" },
-        { "name": "Spring Security", "level": "primary" },
-        { "name": "JWT", "level": "primary" },
-        { "name": "MySQL", "level": "primary" },
-        { "name": "OAuth2", "level": "secondary" }
-      ],
-      "sections": [
-        {
-          "title": "프로젝트 개요",
-          "content": "다양한 서비스에서 공통으로 사용할 수 있는 통합 인증 및 사용자 관리 시스템을 개발했습니다. JWT 기반 토큰 인증과 OAuth2 소셜 로그인을 지원합니다."
-        },
-        {
-          "title": "주요 기능",
-          "content": "• JWT 기반 인증 및 인가<br>• 소셜 로그인 (Google, GitHub)<br>• 사용자 프로필 관리<br>• 권한 기반 접근 제어"
-        },
-        {
-          "title": "기술적 성과",
-          "content": "Spring Security와 JWT를 활용한 안전한 인증 시스템 구축, 확장 가능한 권한 관리 시스템 설계로 재사용성 극대화"
-        }
-      ],
-      "links": [
-        { "name": "GitHub", "url": "#" },
-        { "name": "문서", "url": "#" }
-      ]
-    },
-    {
-      "id": "research",
-      "title": "연구 프로젝트",
-      "period": "2023.01 - 2024.02",
-      "team": "연구 프로젝트",
-      "description": "AI 및 시스템 성능 최적화 관련 연구 프로젝트",
-      "technologies": [
-        { "name": "Python", "level": "primary" },
-        { "name": "Java", "level": "primary" },
-        { "name": "C++", "level": "secondary" },
-        { "name": "TensorFlow", "level": "secondary" }
-      ],
-      "sections": [
-        {
-          "title": "과학 분야 문헌 요약 자동화",
-          "content": "생성형 AI 모델을 활용한 과학 논문 자동 요약 시스템 개발 및 설명가능한 평가 시스템 구축"
-        },
-        {
-          "title": "WebSocket 서버 성능 분석",
-          "content": "다양한 WebSocket 서버 구현체의 성능을 비교 분석하고 최적화 방안을 제시하는 졸업 논문 연구"
-        }
-      ],
-      "links": [
-        { "name": "논문", "url": "#" },
-        { "name": "연구 자료", "url": "#" }
-      ]
-    },
-    {
-      "id": "robot",
-      "title": "롸!봇",
-      "period": "2024.01 - 2024.03",
-      "team": "팀 프로젝트 (4명)",
-      "description": "AI 기반 음성 인식 및 자연어 처리 기술을 활용한 스마트 어시스턴트 봇 개발",
-      "technologies": [
-        { "name": "Java", "level": "primary" },
         { "name": "Spring Boot", "level": "primary" },
-        { "name": "MySQL", "level": "primary" },
-        { "name": "Python", "level": "secondary" },
-        { "name": "Docker", "level": "secondary" }
+        { "name": "Flutter", "level": "primary" },
+        { "name": "Python (FastAPI)", "level": "primary" },
+        { "name": "SBERT + Machine Learning", "level": "secondary" },
+        { "name": "Docker / Docker-Compose", "level": "secondary" }
       ],
       "sections": [
         {
           "title": "프로젝트 개요",
-          "content": "사용자의 음성 명령을 인식하고 자연어로 응답하는 AI 어시스턴트 봇을 개발했습니다. 다양한 API 연동을 통해 실시간 정보 제공 및 작업 자동화 기능을 구현했습니다."
+          "content": "UNUS는 대학생이 자신의 관심사나 전공을 바탕으로 멘토나 비슷한 관심을 가진 동료를 찾고, 공모전이나 대외활동 정보를 추천받으며, 채팅방을 통해 소통 및 협업할 수 있는 플랫폼이다. 멘토/멘티 추천, 활동 추천, 커뮤니티 기능을 하나의 앱으로 구현하였다."
         },
         {
           "title": "주요 기능",
-          "content": "• 음성 인식 및 자연어 처리<br>• 실시간 날씨, 뉴스 정보 제공<br>• 스케줄 관리 및 알림 기능<br>• RESTful API 설계 및 구현"
+          "content": "회원가입 및 인증, 사용자 프로필/관심사 저장, SBERT 기반 관심사 임베딩 및 AI 추천 엔진, 맞춤 멘토/활동 추천, 그룹 채팅 및 커뮤니티, 크로스플랫폼 모바일 앱 지원, 컨테이너 기반 배포 환경."
         },
         {
           "title": "담당 역할",
-          "content": "백엔드 API 설계 및 구현, 데이터베이스 설계, 음성 처리 모듈 연동, 시스템 아키텍처 설계를 담당했습니다."
+          "content": "Spring Boot 기반 백엔드 설계 및 구현, 데이터베이스 스키마 설계, Flutter 앱과의 API 설계, AI 추천 모듈(FastAPI + SBERT + MLP) 설계 및 구현, Docker 기반 전체 서비스 배포 환경 구성."
+        },
+        {
+          "title": "기술적 성과",
+          "content": "자기소개만으로 cold-start 대응 가능한 추천 시스템 구현, SBERT 임베딩 + 유사도 기반 추천 및 MLP 회귀 모델 기반 점수 산출 로직 구축, 마이크로서비스 구조를 통한 유지보수성 확보, 실제 작동 가능한 풀스택 앱 배포 성공."
+        }
+      ],
+      "images": [
+        {
+          "path": "images/projects/unus/main.png",
+          "alt": "UNUS 메인 화면",
+          "caption": "메인 화면"
+        }
+      ],
+      "files": [],
+      "links": [
+        { "name": "GitHub", "url": "https://github.com/DPChanny/unus" },
+        { "name": "기술 문서", "url": "https://dpchanny.tistory.com/3" }
+      ]
+    },
+    {
+      "id": "ws-research",
+      "title": "WebSocket 서버 성능 비교 연구",
+      "period": "2023.09 - 2024.02",
+      "team": "개인 연구 프로젝트",
+      "description": "Spring, Node.js, FastAPI 기반 WebSocket 서버의 구조적 차이에 따른 성능을 정량적으로 비교한 연구",
+      "technologies": [
+        { "name": "Java (Spring WebSocket / STOMP)", "level": "primary" },
+        { "name": "Node.js (ws)", "level": "primary" },
+        { "name": "Python (FastAPI WebSocket)", "level": "secondary" },
+        { "name": "k6", "level": "secondary" },
+        { "name": "Docker", "level": "primary" },
+        { "name": "Grafana / VictoriaMetrics", "level": "secondary" }
+      ],
+      "sections": [
+        {
+          "title": "연구 개요",
+          "content": "실시간 협업 시스템의 성능을 결정하는 WebSocket 서버 프레임워크를 비교하기 위해 Spring WebSocket, Spring STOMP, Node.js, FastAPI 서버를 동일 조건에서 구현하고 성능을 정량적으로 비교하였다."
+        },
+        {
+          "title": "주요 실험 내용",
+          "content": "AWS EC2 환경에서 Docker 기반 서버를 구성하고 k6로 100~1000명 규모의 사용자를 시뮬레이션하였다. RTT, TPS, 메시지 손실률, 시스템 자원 사용량 등 핵심 지표를 수집하고 프레임워크별 구조적 차이를 분석하였다."
+        },
+        {
+          "title": "핵심 결과",
+          "content": "Spring 기반 WebSocket 서버는 멀티스레드 구조 덕분에 고부하에서도 안정적인 성능을 보였다. Node.js는 중간 부하까지는 효율적이지만 고부하에서는 단일 이벤트 루프의 한계로 지연이 발생했다. FastAPI는 500명 이상 사용자 환경에서 세션 유지 실패와 손실률 증가가 두드러졌다."
+        },
+        {
+          "title": "추가 실험 및 분석",
+          "content": "Node.js와 FastAPI에 대해 멀티 워커와 Redis Pub/Sub 기반 확장 전략을 적용했으나, 메시지 복제 오버헤드 증가로 인해 오히려 TPS 감소와 90% 수준의 손실률 증가가 발생하였다."
+        },
+        {
+          "title": "연구 의의",
+          "content": "프레임워크 내부 아키텍처 차이가 실시간 동기화 성능에 직결된다는 점을 실증적으로 확인하였으며, 실시간 협업 시스템 구축 시 서버 선택 기준과 구조적 병목 해결 전략을 제시하였다."
+        }
+      ],
+      "images": [
+        {
+          "path": "images/projects/websocket_study/performance_chart.png",
+          "alt": "성능 비교 차트",
+          "caption": "프레임워크별 성능 비교"
+        }
+      ],
+      "files": [
+        {
+          "name": "연구 보고서",
+          "path": "files/websocket_research_report.pdf",
+          "type": "pdf"
         }
       ],
       "links": [
-        { "name": "GitHub", "url": "#" },
-        { "name": "데모", "url": "#" }
+        { "name": "연구 보고서", "url": "#" }
+      ]
+    },
+    {
+      "id": "multi-doc-sum",
+      "title": "과학 분야 다중 문서 요약을 위한 개선된 요약 및 평가 방안 연구",
+      "period": "2024.03 - 2024.12",
+      "team": "연구 프로젝트",
+      "description": "대형 언어 모델을 활용한 과학 분야 다중 문서 요약 자동화 연구 및 평가 지표 개선",
+      "technologies": [
+        { "name": "GPT-4o-mini", "level": "primary" },
+        { "name": "Longformer Encoder-Decoder", "level": "primary" },
+        { "name": "Python", "level": "primary" },
+        { "name": "HuggingFace Transformers", "level": "secondary" },
+        { "name": "GEval / ROUGE / BERTScore", "level": "secondary" }
+      ],
+      "sections": [
+        {
+          "title": "연구 개요",
+          "content": "과학 분야 체계적 문헌 고찰 자동화를 목표로 대형 언어 모델을 활용한 다중 문서 요약 실험을 수행하였다. 기존 모델의 한계를 분석하고 GPT-4o-mini의 요약 성능을 정량적으로 평가하는 체계를 구축하였다."
+        },
+        {
+          "title": "연구 방법",
+          "content": "Cochrane 문헌 데이터셋을 기반으로 LED-16K 모델과 GPT-4o-mini 모델을 비교 분석하였다. Lecture Summarizer를 활용한 추출 요약 과정을 구성하여 입력 길이 문제를 보완하고 다양한 평가 지표를 활용해 성능을 측정하였다."
+        },
+        {
+          "title": "핵심 결과",
+          "content": "ROUGE와 BERTScore에서는 LED-16K가 높은 점수를 기록했으나, 의미적·문맥적 평가를 수행하는 GEval 기준에서는 GPT-4o-mini가 더 우수한 성능을 보였다. 이는 표면적 유사성 중심의 기존 평가 방식의 한계를 확인하는 결과이다."
+        },
+        {
+          "title": "기술적 성과",
+          "content": "대형 언어 모델 기반 요약 품질 평가 체계를 도입하여 기존 지표가 놓치던 의미적 충실도를 정량화하였다. GPT-4o-mini의 문맥 기반 요약 능력이 다중 문서 요약에서 실질적으로 높은 품질을 보인다는 점을 검증하였다."
+        }
+      ],
+      "images": [
+        {
+          "path": "images/projects/generate_ai_study/evaluation_results.png",
+          "alt": "평가 결과",
+          "caption": "모델별 평가 결과 비교"
+        }
+      ],
+      "files": [
+        {
+          "name": "논문",
+          "path": "files/multi_doc_summary_paper.pdf",
+          "type": "pdf"
+        }
+      ],
+      "links": [
+        { "name": "논문", "url": "#" }
       ]
     }
   ]

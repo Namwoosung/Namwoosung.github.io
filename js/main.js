@@ -165,6 +165,43 @@ async function openProjectModal(projectId) {
                     </div>
                 </div>
                 
+                ${project.images && project.images.length > 0 ? `
+                <div class="project-images">
+                    <h3>이미지</h3>
+                    <div class="images-gallery">
+                        ${project.images
+                          .map(
+                            (img) => `
+                            <div class="gallery-item">
+                                <img src="${img.path}" alt="${img.alt || ''}" class="gallery-image" onclick="openImageModal('${img.path}', '${img.caption || img.alt || ''}')" />
+                                ${img.caption ? `<p class="image-caption">${img.caption}</p>` : ''}
+                            </div>
+                        `
+                          )
+                          .join("")}
+                    </div>
+                </div>
+                ` : ''}
+                
+                ${project.files && project.files.length > 0 ? `
+                <div class="project-files">
+                    <h3>관련 자료</h3>
+                    <div class="files-list">
+                        ${project.files
+                          .map(
+                            (file) => `
+                            <a href="${file.path}" class="file-link" download>
+                                <span class="file-icon">📄</span>
+                                <span class="file-name">${file.name}</span>
+                                <span class="file-type">${file.type ? file.type.toUpperCase() : ''}</span>
+                            </a>
+                        `
+                          )
+                          .join("")}
+                    </div>
+                </div>
+                ` : ''}
+                
                 <div class="project-links">
                     <h3>관련 링크</h3>
                     <div class="links-list">
@@ -195,6 +232,38 @@ function closeProjectModal() {
     modal.classList.remove("show");
     setTimeout(() => {
       document.body.removeChild(modal);
+      document.body.style.overflow = "";
+    }, 300);
+  }
+}
+
+// Image modal functionality
+function openImageModal(imagePath, caption) {
+  const imageModal = document.createElement("div");
+  imageModal.className = "image-modal";
+  imageModal.innerHTML = `
+    <div class="image-modal-overlay" onclick="closeImageModal()"></div>
+    <div class="image-modal-content">
+      <button class="image-modal-close" onclick="closeImageModal()">×</button>
+      <img src="${imagePath}" alt="${caption}" class="modal-full-image" />
+      ${caption ? `<p class="modal-image-caption">${caption}</p>` : ''}
+    </div>
+  `;
+  
+  document.body.appendChild(imageModal);
+  document.body.style.overflow = "hidden";
+  
+  setTimeout(() => {
+    imageModal.classList.add("show");
+  }, 10);
+}
+
+function closeImageModal() {
+  const imageModal = document.querySelector(".image-modal");
+  if (imageModal) {
+    imageModal.classList.remove("show");
+    setTimeout(() => {
+      document.body.removeChild(imageModal);
       document.body.style.overflow = "";
     }, 300);
   }
