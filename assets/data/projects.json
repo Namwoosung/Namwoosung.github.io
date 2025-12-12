@@ -79,12 +79,58 @@
       ],
       "images": [
         {
-          "path": "images/projects/unus/main.png",
+          "path": "images/projects/unus/main_page.png",
           "alt": "UNUS 메인 화면",
           "caption": "메인 화면"
+        },
+        {
+          "path": "images/projects/unus/architecture.png",
+          "alt": "UNUS 아키텍처",
+          "caption": "시스템 아키텍처"
+        },
+        {
+          "path": "images/projects/unus/page_1.png",
+          "alt": "UNUS 페이지 1",
+          "caption": "주요 기능 화면 1"
+        },
+        {
+          "path": "images/projects/unus/page_2.png",
+          "alt": "UNUS 페이지 2",
+          "caption": "주요 기능 화면 2"
+        },
+        {
+          "path": "images/projects/unus/page_3.png",
+          "alt": "UNUS 페이지 3",
+          "caption": "주요 기능 화면 3"
+        },
+        {
+          "path": "images/projects/unus/page_4.png",
+          "alt": "UNUS 페이지 4",
+          "caption": "주요 기능 화면 4"
         }
       ],
-      "files": [],
+      "files": [
+        {
+          "name": "세모톤 11팀 발표 PPT",
+          "path": "files/projects/unus/세모톤 11팀 발표 PPT.pdf",
+          "type": "pdf"
+        },
+        {
+          "name": "FastAPI 기술 문서",
+          "path": "files/projects/unus/SEMOTHON - 11 - Fast API.html",
+          "type": "html"
+        },
+        {
+          "name": "프로젝트 개발 환경 및 배포 환경 구성 문서",
+          "path": "files/projects/unus/SEMOTHON - 11 - 프로젝트 개발 환경 및 배포 환경 구성 문서.html",
+          "type": "html"
+        },
+        {
+          "name": "AI 추천 시스템 문서",
+          "path": "files/projects/unus/SEMOTHON 11 - AI.html",
+          "type": "html"
+        }
+      ],
       "links": [
         { "name": "GitHub", "url": "https://github.com/DPChanny/unus" },
         { "name": "기술 문서", "url": "https://dpchanny.tistory.com/3" }

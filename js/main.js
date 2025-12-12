@@ -171,9 +171,9 @@ async function openProjectModal(projectId) {
                     <div class="images-gallery">
                         ${project.images
                           .map(
-                            (img) => `
+                            (img, index) => `
                             <div class="gallery-item">
-                                <img src="${img.path}" alt="${img.alt || ''}" class="gallery-image" onclick="openImageModal('${img.path}', '${img.caption || img.alt || ''}')" />
+                                <img src="${img.path}" alt="${img.alt || ''}" class="gallery-image" onclick="openImageModal(${index}, '${projectId}')" />
                                 ${img.caption ? `<p class="image-caption">${img.caption}</p>` : ''}
                             </div>
                         `
@@ -189,13 +189,17 @@ async function openProjectModal(projectId) {
                     <div class="files-list">
                         ${project.files
                           .map(
-                            (file) => `
-                            <a href="${file.path}" class="file-link" download>
-                                <span class="file-icon">📄</span>
+                            (file) => {
+                              const isHtml = file.type && file.type.toLowerCase() === 'html';
+                              const fileIcon = isHtml ? '🌐' : '📄';
+                              return `
+                            <a href="${file.path}" class="file-link" ${isHtml ? 'target="_blank" rel="noopener noreferrer"' : 'download'}>
+                                <span class="file-icon">${fileIcon}</span>
                                 <span class="file-name">${file.name}</span>
                                 <span class="file-type">${file.type ? file.type.toUpperCase() : ''}</span>
                             </a>
-                        `
+                        `;
+                            }
                           )
                           .join("")}
                     </div>
@@ -238,33 +242,99 @@ function closeProjectModal() {
 }
 
 // Image modal functionality
-function openImageModal(imagePath, caption) {
+let currentImageIndex = 0;
+let currentProjectImages = [];
+
+async function openImageModal(imageIndex, projectId) {
+  if (projectsData.length === 0) {
+    projectsData = await loadProjectsData();
+  }
+  
+  const project = projectsData.find((p) => p.id === projectId);
+  if (!project || !project.images || project.images.length === 0) return;
+  
+  currentProjectImages = project.images;
+  currentImageIndex = imageIndex;
+  
+  const image = currentProjectImages[currentImageIndex];
   const imageModal = document.createElement("div");
   imageModal.className = "image-modal";
+  
+  const hasMultiple = currentProjectImages.length > 1;
+  const prevButton = hasMultiple ? `<button class="image-nav-btn image-nav-prev" onclick="navigateImage(-1)">‹</button>` : '';
+  const nextButton = hasMultiple ? `<button class="image-nav-btn image-nav-next" onclick="navigateImage(1)">›</button>` : '';
+  const imageCounter = hasMultiple ? `<div class="image-counter">${currentImageIndex + 1} / ${currentProjectImages.length}</div>` : '';
+  
   imageModal.innerHTML = `
     <div class="image-modal-overlay" onclick="closeImageModal()"></div>
     <div class="image-modal-content">
       <button class="image-modal-close" onclick="closeImageModal()">×</button>
-      <img src="${imagePath}" alt="${caption}" class="modal-full-image" />
-      ${caption ? `<p class="modal-image-caption">${caption}</p>` : ''}
+      ${prevButton}
+      <img src="${image.path}" alt="${image.caption || image.alt || ''}" class="modal-full-image" />
+      ${nextButton}
+      ${imageCounter}
+      ${image.caption ? `<p class="modal-image-caption">${image.caption}</p>` : ''}
     </div>
   `;
   
   document.body.appendChild(imageModal);
   document.body.style.overflow = "hidden";
   
+  // Keyboard navigation
+  const handleKeyPress = (e) => {
+    if (e.key === 'ArrowLeft') navigateImage(-1);
+    if (e.key === 'ArrowRight') navigateImage(1);
+    if (e.key === 'Escape') closeImageModal();
+  };
+  window.addEventListener('keydown', handleKeyPress);
+  imageModal._keyHandler = handleKeyPress;
+  
   setTimeout(() => {
     imageModal.classList.add("show");
   }, 10);
 }
 
+function navigateImage(direction) {
+  if (currentProjectImages.length === 0) return;
+  
+  currentImageIndex += direction;
+  if (currentImageIndex < 0) currentImageIndex = currentProjectImages.length - 1;
+  if (currentImageIndex >= currentProjectImages.length) currentImageIndex = 0;
+  
+  const image = currentProjectImages[currentImageIndex];
+  const modalContent = document.querySelector('.image-modal-content');
+  const img = modalContent.querySelector('.modal-full-image');
+  const caption = modalContent.querySelector('.modal-image-caption');
+  const counter = modalContent.querySelector('.image-counter');
+  
+  img.style.opacity = '0';
+  
+  setTimeout(() => {
+    img.src = image.path;
+    img.alt = image.caption || image.alt || '';
+    if (caption) {
+      caption.textContent = image.caption || '';
+      caption.style.display = image.caption ? 'block' : 'none';
+    }
+    if (counter) {
+      counter.textContent = `${currentImageIndex + 1} / ${currentProjectImages.length}`;
+    }
+    img.style.opacity = '1';
+  }, 150);
+}
+
 function closeImageModal() {
   const imageModal = document.querySelector(".image-modal");
   if (imageModal) {
+    if (imageModal._keyHandler) {
+      window.removeEventListener('keydown', imageModal._keyHandler);
+    }
     imageModal.classList.remove("show");
     setTimeout(() => {
       document.body.removeChild(imageModal);
       document.body.style.overflow = "";
+      currentImageIndex = 0;
+      currentProjectImages = [];
     }, 300);
   }
 }
