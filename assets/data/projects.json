@@ -36,9 +36,14 @@
       ],
       "images": [
         {
-          "path": "images/projects/facticle/main.png",
+          "path": "images/projects/facticle/main_page.png",
           "alt": "Facticle 메인 화면",
           "caption": "메인 화면"
+        },
+        {
+          "path": "images/projects/facticle/page_1.png",
+          "alt": "Facticle 주요 기능 화면",
+          "caption": "주요 기능 화면"
         }
       ],
       "files": [],
