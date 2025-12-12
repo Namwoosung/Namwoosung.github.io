@@ -174,15 +174,45 @@
       ],
       "images": [
         {
-          "path": "images/projects/websocket_study/performance_chart.png",
-          "alt": "성능 비교 차트",
-          "caption": "프레임워크별 성능 비교"
+          "path": "images/projects/websocket_study/architecture.png",
+          "alt": "WebSocket 서버 아키텍처",
+          "caption": "연구 아키텍처 구조"
+        },
+        {
+          "path": "images/projects/websocket_study/spring_pure_temp.png",
+          "alt": "Spring WebSocket 성능 결과",
+          "caption": "Spring WebSocket 성능 측정 결과"
+        },
+        {
+          "path": "images/projects/websocket_study/spring_stomp_temp.png",
+          "alt": "Spring STOMP 성능 결과",
+          "caption": "Spring STOMP 성능 측정 결과"
+        },
+        {
+          "path": "images/projects/websocket_study/node_pure_temp.png",
+          "alt": "Node.js WebSocket 성능 결과",
+          "caption": "Node.js WebSocket 성능 측정 결과"
+        },
+        {
+          "path": "images/projects/websocket_study/node_pure_opt_temp.png",
+          "alt": "Node.js 최적화 성능 결과",
+          "caption": "Node.js 최적화 전략 성능 결과"
+        },
+        {
+          "path": "images/projects/websocket_study/fastapi_pure_temp.png",
+          "alt": "FastAPI WebSocket 성능 결과",
+          "caption": "FastAPI WebSocket 성능 측정 결과"
+        },
+        {
+          "path": "images/projects/websocket_study/fastapi_opt_temp.png",
+          "alt": "FastAPI 최적화 성능 결과",
+          "caption": "FastAPI 최적화 전략 성능 결과"
         }
       ],
       "files": [
         {
-          "name": "연구 보고서",
-          "path": "files/websocket_research_report.pdf",
+          "name": "WebSocket 서버 성능 비교 연구",
+          "path": "files/projects/websocket_study/WebSocket 서버 성능 비교 연구.pdf",
           "type": "pdf"
         }
       ],
@@ -223,15 +253,20 @@
       ],
       "images": [
         {
-          "path": "images/projects/generate_ai_study/evaluation_results.png",
-          "alt": "평가 결과",
-          "caption": "모델별 평가 결과 비교"
+          "path": "images/projects/generate_ai_study/result_1.png",
+          "alt": "평가 결과 1",
+          "caption": "모델별 평가 결과 비교 (ROUGE, BERTScore)"
+        },
+        {
+          "path": "images/projects/generate_ai_study/result_2.png",
+          "alt": "평가 결과 2",
+          "caption": "모델별 평가 결과 비교 (GEval)"
         }
       ],
       "files": [
         {
-          "name": "논문",
-          "path": "files/multi_doc_summary_paper.pdf",
+          "name": "과학 분야 다중 문서 요약을 위한 개선된 요약 및 평가 방안 연구",
+          "path": "files/projects/generate_ai_study/과학 분야 다중 문서 요약을 위한 개선된 요약 및 평가 방안 연구.pdf",
           "type": "pdf"
         }
       ],
