@@ -110,6 +110,227 @@ window.addEventListener("scroll", () => {
 // Project modal functionality
 let projectsData = [];
 
+function buildDetailSection(projectId, section, sectionIndex) {
+  const summary = section.summary
+    ? `<p class="detail-summary">${section.summary}</p>`
+    : "";
+
+  const bullets =
+    section.bullets && section.bullets.length > 0
+      ? `<ul class="detail-bullets">
+          ${section.bullets.map((item) => `<li>${item}</li>`).join("")}
+        </ul>`
+      : "";
+
+  const metrics =
+    section.metrics && section.metrics.length > 0
+      ? `<div class="detail-metrics">
+          ${section.metrics
+            .map(
+              (metric) => `
+                <div class="detail-metric-card ${metric.type || ""}">
+                  <div class="metric-label">${metric.metric}</div>
+                  <div class="metric-value">${metric.value}</div>
+                </div>
+              `
+            )
+            .join("")}
+        </div>`
+      : "";
+
+  const images =
+    section.images && section.images.length > 0
+      ? `<div class="detail-images">
+          ${section.images
+            .map(
+              (img, idx) => `
+                <figure class="detail-image-card">
+                  <img 
+                    src="${img.path}" 
+                    alt="${img.alt || ""}" 
+                    class="detail-image" 
+                    onclick="openImageModalFromSection('${projectId}', ${sectionIndex}, ${idx})"
+                  />
+                  ${
+                    img.caption
+                      ? `<figcaption class="detail-image-caption">${img.caption}</figcaption>`
+                      : ""
+                  }
+                </figure>
+              `
+            )
+            .join("")}
+        </div>`
+      : "";
+
+  return `
+    <div class="detail-section" data-section="${section.id || sectionIndex}">
+      <div class="detail-section-header">
+        <h3 class="section-title-main">${section.title || ""}</h3>
+      </div>
+      <div class="detail-section-body">
+        ${summary}
+        ${bullets}
+        ${metrics}
+        ${images}
+      </div>
+    </div>
+  `;
+}
+
+function buildFallbackSections(project, projectId) {
+  // Role
+  const roleSection =
+    project.role && project.role.length > 0
+      ? `
+    <div class="project-highlight-section role-section">
+      <h3 class="section-title-main">👤 담당 역할</h3>
+      <ul class="highlight-list">
+        ${project.role.map((role) => `<li>${role}</li>`).join("")}
+      </ul>
+    </div>
+  `
+      : "";
+
+  // Contribution
+  const contributionSection =
+    project.contribution && project.contribution.length > 0
+      ? `
+    <div class="project-highlight-section contribution-section">
+      <h3 class="section-title-main">💡 주요 기여</h3>
+      <ul class="highlight-list">
+        ${project.contribution.map((contrib) => `<li>${contrib}</li>`).join("")}
+      </ul>
+    </div>
+  `
+      : "";
+
+  // Achievements
+  const achievementsSection =
+    project.achievements && project.achievements.length > 0
+      ? `
+    <div class="project-highlight-section achievements-section">
+      <h3 class="section-title-main">🏆 주요 성과</h3>
+      <div class="achievements-grid">
+        ${project.achievements
+          .map(
+            (achievement) => `
+          <div class="achievement-card ${achievement.type}">
+            <div class="achievement-metric">${achievement.metric}</div>
+            <div class="achievement-value">${achievement.value}</div>
+          </div>
+        `
+          )
+          .join("")}
+      </div>
+    </div>
+  `
+      : "";
+
+  // Problem solving
+  const problemSolvingSection =
+    project.problemSolving && project.problemSolving.length > 0
+      ? `
+    <div class="project-highlight-section problem-solving-section">
+      <h3 class="section-title-main">🔧 문제 해결 과정</h3>
+      ${project.problemSolving
+        .map(
+          (problem, index) => `
+        <div class="problem-solving-item">
+          <div class="problem-header">
+            <span class="problem-number">문제 ${index + 1}</span>
+          </div>
+          <div class="problem-content">
+            <div class="problem-item">
+              <strong class="problem-label">❌ 문제상황:</strong>
+              <p>${problem.problem}</p>
+            </div>
+            <div class="problem-item">
+              <strong class="problem-label">🔍 원인 분석:</strong>
+              <p>${problem.cause}</p>
+            </div>
+            <div class="problem-item">
+              <strong class="problem-label">✅ 해결책:</strong>
+              <p>${problem.solution}</p>
+            </div>
+            <div class="problem-item">
+              <strong class="problem-label">📊 해결 과정:</strong>
+              <p>${problem.process}</p>
+            </div>
+          </div>
+        </div>
+      `
+        )
+        .join("")}
+    </div>
+  `
+      : "";
+
+  // Learnings
+  const learningsSection =
+    project.learnings && project.learnings.length > 0
+      ? `
+    <div class="project-highlight-section learnings-section">
+      <h3 class="section-title-main">📚 얻은 것</h3>
+      <ul class="learnings-list">
+        ${project.learnings.map((learning) => `<li>${learning}</li>`).join("")}
+      </ul>
+    </div>
+  `
+      : "";
+
+  // Misc sections
+  const sectionsBlock =
+    project.sections && project.sections.length > 0
+      ? `
+    <div class="project-sections">
+      ${project.sections
+        .map(
+          (section) => `
+        <div class="project-section">
+          <h3 class="section-title-sub">${section.title}</h3>
+          <div class="section-content">${section.content}</div>
+        </div>
+      `
+        )
+        .join("")}
+    </div>
+  `
+      : "";
+
+  // Images
+  const imagesBlock =
+    project.images && project.images.length > 0
+      ? `
+    <div class="project-images">
+      <h3 class="section-title-sub">🖼️ 프로젝트 이미지</h3>
+      <div class="images-gallery">
+        ${project.images
+          .map(
+            (img, index) => `
+            <div class="gallery-item">
+              <img src="${img.path}" alt="${img.alt || ""}" class="gallery-image" onclick="openImageModal(${index}, '${projectId}')" />
+              ${img.caption ? `<p class="image-caption">${img.caption}</p>` : ""}
+            </div>
+        `
+          )
+          .join("")}
+      </div>
+    </div>
+  `
+      : "";
+
+  return `
+    ${roleSection}
+    ${contributionSection}
+    ${achievementsSection}
+    ${problemSolvingSection}
+    ${learningsSection}
+    ${sectionsBlock}
+    ${imagesBlock}
+  `;
+}
+
 async function openProjectModal(projectId) {
   if (projectsData.length === 0) {
     projectsData = await loadProjectsData();
@@ -120,16 +341,25 @@ async function openProjectModal(projectId) {
 
   const modal = document.createElement("div");
   modal.className = "project-modal";
+
+  const detailSections =
+    project.detailSections && project.detailSections.length > 0
+      ? `
+        <div class="project-detail-sections">
+          ${project.detailSections
+            .map((section, idx) => buildDetailSection(projectId, section, idx))
+            .join("")}
+        </div>
+      `
+      : buildFallbackSections(project, projectId);
+
   modal.innerHTML = `
         <div class="modal-overlay" onclick="closeProjectModal()"></div>
         <div class="modal-content">
             <div class="modal-header">
-                <h2>${project.title}</h2>
-                <button class="modal-close" onclick="closeProjectModal()">×</button>
-            </div>
-            <div class="modal-body">
-                <div class="project-info">
-                    <div class="project-meta">
+                <div class="modal-header-content">
+                    <h2>${project.title}</h2>
+                    <div class="project-meta-header">
                         <span class="meta-item">
                             <strong>기간:</strong> ${project.period}
                         </span>
@@ -137,24 +367,21 @@ async function openProjectModal(projectId) {
                             <strong>팀:</strong> ${project.team}
                         </span>
                     </div>
-                    <p class="project-description">${project.description}</p>
                 </div>
-                
-                <div class="project-sections">
-                    ${project.sections
-                      .map(
-                        (section) => `
-                        <div class="project-section">
-                            <h3>${section.title}</h3>
-                            <div class="section-content">${section.content}</div>
-                        </div>
-                    `
-                      )
-                      .join("")}
+                <button class="modal-close" onclick="closeProjectModal()">×</button>
+            </div>
+            <div class="modal-body">
+                ${project.overview ? `
+                <div class="project-overview-section">
+                  <h3 class="section-title-main">📋 프로젝트 소개</h3>
+                  <p class="overview-text">${project.overview}</p>
                 </div>
-                
+                ` : ''}
+
+                ${detailSections}
+
                 <div class="project-technologies">
-                    <h3>사용 기술</h3>
+                    <h3 class="section-title-sub">🛠️ 사용 기술</h3>
                     <div class="tech-list">
                         ${project.technologies
                           .map(
@@ -165,27 +392,9 @@ async function openProjectModal(projectId) {
                     </div>
                 </div>
                 
-                ${project.images && project.images.length > 0 ? `
-                <div class="project-images">
-                    <h3>이미지</h3>
-                    <div class="images-gallery">
-                        ${project.images
-                          .map(
-                            (img, index) => `
-                            <div class="gallery-item">
-                                <img src="${img.path}" alt="${img.alt || ''}" class="gallery-image" onclick="openImageModal(${index}, '${projectId}')" />
-                                ${img.caption ? `<p class="image-caption">${img.caption}</p>` : ''}
-                            </div>
-                        `
-                          )
-                          .join("")}
-                    </div>
-                </div>
-                ` : ''}
-                
                 ${project.files && project.files.length > 0 ? `
                 <div class="project-files">
-                    <h3>관련 자료</h3>
+                    <h3 class="section-title-sub">📁 관련 자료</h3>
                     <div class="files-list">
                         ${project.files
                           .map(
@@ -206,8 +415,9 @@ async function openProjectModal(projectId) {
                 </div>
                 ` : ''}
                 
+                ${project.links && project.links.length > 0 ? `
                 <div class="project-links">
-                    <h3>관련 링크</h3>
+                    <h3 class="section-title-sub">🔗 관련 링크</h3>
                     <div class="links-list">
                         ${project.links
                           .map(
@@ -217,6 +427,7 @@ async function openProjectModal(projectId) {
                           .join("")}
                     </div>
                 </div>
+                ` : ''}
             </div>
         </div>
     `;
@@ -245,81 +456,110 @@ function closeProjectModal() {
 let currentImageIndex = 0;
 let currentProjectImages = [];
 
-async function openImageModal(imageIndex, projectId) {
-  if (projectsData.length === 0) {
-    projectsData = await loadProjectsData();
-  }
-  
-  const project = projectsData.find((p) => p.id === projectId);
-  if (!project || !project.images || project.images.length === 0) return;
-  
-  currentProjectImages = project.images;
-  currentImageIndex = imageIndex;
-  
+function showImageModal(images, startIndex = 0) {
+  if (!images || images.length === 0) return;
+  currentProjectImages = images;
+  currentImageIndex = startIndex;
+
   const image = currentProjectImages[currentImageIndex];
   const imageModal = document.createElement("div");
   imageModal.className = "image-modal";
-  
+
   const hasMultiple = currentProjectImages.length > 1;
-  const prevButton = hasMultiple ? `<button class="image-nav-btn image-nav-prev" onclick="navigateImage(-1)">‹</button>` : '';
-  const nextButton = hasMultiple ? `<button class="image-nav-btn image-nav-next" onclick="navigateImage(1)">›</button>` : '';
-  const imageCounter = hasMultiple ? `<div class="image-counter">${currentImageIndex + 1} / ${currentProjectImages.length}</div>` : '';
-  
+  const prevButton = hasMultiple
+    ? `<button class="image-nav-btn image-nav-prev" onclick="navigateImage(-1)">‹</button>`
+    : "";
+  const nextButton = hasMultiple
+    ? `<button class="image-nav-btn image-nav-next" onclick="navigateImage(1)">›</button>`
+    : "";
+  const imageCounter = hasMultiple
+    ? `<div class="image-counter">${currentImageIndex + 1} / ${
+        currentProjectImages.length
+      }</div>`
+    : "";
+
   imageModal.innerHTML = `
     <div class="image-modal-overlay" onclick="closeImageModal()"></div>
     <div class="image-modal-content">
       <button class="image-modal-close" onclick="closeImageModal()">×</button>
       ${prevButton}
-      <img src="${image.path}" alt="${image.caption || image.alt || ''}" class="modal-full-image" />
+      <img src="${image.path}" alt="${image.caption || image.alt || ""}" class="modal-full-image" />
       ${nextButton}
       ${imageCounter}
-      ${image.caption ? `<p class="modal-image-caption">${image.caption}</p>` : ''}
+      ${image.caption ? `<p class="modal-image-caption">${image.caption}</p>` : ""}
     </div>
   `;
-  
+
   document.body.appendChild(imageModal);
   document.body.style.overflow = "hidden";
-  
-  // Keyboard navigation
+
   const handleKeyPress = (e) => {
-    if (e.key === 'ArrowLeft') navigateImage(-1);
-    if (e.key === 'ArrowRight') navigateImage(1);
-    if (e.key === 'Escape') closeImageModal();
+    if (e.key === "ArrowLeft") navigateImage(-1);
+    if (e.key === "ArrowRight") navigateImage(1);
+    if (e.key === "Escape") closeImageModal();
   };
-  window.addEventListener('keydown', handleKeyPress);
+  window.addEventListener("keydown", handleKeyPress);
   imageModal._keyHandler = handleKeyPress;
-  
+
   setTimeout(() => {
     imageModal.classList.add("show");
   }, 10);
 }
 
+async function openImageModal(imageIndex, projectId) {
+  if (projectsData.length === 0) {
+    projectsData = await loadProjectsData();
+  }
+
+  const project = projectsData.find((p) => p.id === projectId);
+  if (!project || !project.images || project.images.length === 0) return;
+
+  showImageModal(project.images, imageIndex);
+}
+
+async function openImageModalFromSection(projectId, sectionIndex, imageIndex) {
+  if (projectsData.length === 0) {
+    projectsData = await loadProjectsData();
+  }
+
+  const project = projectsData.find((p) => p.id === projectId);
+  const section =
+    project &&
+    project.detailSections &&
+    project.detailSections.length > sectionIndex
+      ? project.detailSections[sectionIndex]
+      : null;
+  if (!section || !section.images || section.images.length === 0) return;
+
+  showImageModal(section.images, imageIndex);
+}
+
 function navigateImage(direction) {
   if (currentProjectImages.length === 0) return;
-  
+
   currentImageIndex += direction;
   if (currentImageIndex < 0) currentImageIndex = currentProjectImages.length - 1;
   if (currentImageIndex >= currentProjectImages.length) currentImageIndex = 0;
-  
+
   const image = currentProjectImages[currentImageIndex];
-  const modalContent = document.querySelector('.image-modal-content');
-  const img = modalContent.querySelector('.modal-full-image');
-  const caption = modalContent.querySelector('.modal-image-caption');
-  const counter = modalContent.querySelector('.image-counter');
-  
-  img.style.opacity = '0';
-  
+  const modalContent = document.querySelector(".image-modal-content");
+  const img = modalContent.querySelector(".modal-full-image");
+  const caption = modalContent.querySelector(".modal-image-caption");
+  const counter = modalContent.querySelector(".image-counter");
+
+  img.style.opacity = "0";
+
   setTimeout(() => {
     img.src = image.path;
-    img.alt = image.caption || image.alt || '';
+    img.alt = image.caption || image.alt || "";
     if (caption) {
-      caption.textContent = image.caption || '';
-      caption.style.display = image.caption ? 'block' : 'none';
+      caption.textContent = image.caption || "";
+      caption.style.display = image.caption ? "block" : "none";
     }
     if (counter) {
       counter.textContent = `${currentImageIndex + 1} / ${currentProjectImages.length}`;
     }
-    img.style.opacity = '1';
+    img.style.opacity = "1";
   }, 150);
 }
 
@@ -327,7 +567,7 @@ function closeImageModal() {
   const imageModal = document.querySelector(".image-modal");
   if (imageModal) {
     if (imageModal._keyHandler) {
-      window.removeEventListener('keydown', imageModal._keyHandler);
+      window.removeEventListener("keydown", imageModal._keyHandler);
     }
     imageModal.classList.remove("show");
     setTimeout(() => {
