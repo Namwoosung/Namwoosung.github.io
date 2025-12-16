@@ -126,208 +126,61 @@ function buildDetailSection(projectId, section, sectionIndex) {
     section.metrics && section.metrics.length > 0
       ? `<div class="detail-metrics">
           ${section.metrics
-            .map(
-              (metric) => `
+        .map(
+          (metric) => `
                 <div class="detail-metric-card ${metric.type || ""}">
                   <div class="metric-label">${metric.metric}</div>
                   <div class="metric-value">${metric.value}</div>
                 </div>
               `
-            )
-            .join("")}
+        )
+        .join("")}
         </div>`
       : "";
 
   const images =
     section.images && section.images.length > 0
-      ? `<div class="detail-images">
-          ${section.images
-            .map(
-              (img, idx) => `
-                <figure class="detail-image-card">
-                  <img 
-                    src="${img.path}" 
-                    alt="${img.alt || ""}" 
-                    class="detail-image" 
-                    onclick="openImageModalFromSection('${projectId}', ${sectionIndex}, ${idx})"
-                  />
-                  ${
-                    img.caption
-                      ? `<figcaption class="detail-image-caption">${img.caption}</figcaption>`
-                      : ""
-                  }
-                </figure>
-              `
-            )
-            .join("")}
+      ? `<div class="section-image-wrapper">
+          <div class="detail-images">
+            ${section.images
+        .map(
+          (img, idx) => `
+                  <figure class="detail-image-card">
+                    <img 
+                      src="${img.path}" 
+                      alt="${img.alt || ""}" 
+                      class="detail-image" 
+                      onclick="openImageModalFromSection('${projectId}', ${sectionIndex}, ${idx})"
+                    />
+                    ${img.caption
+              ? `<figcaption class="detail-image-caption">${img.caption}</figcaption>`
+              : ""
+            }
+                  </figure>
+                `
+        )
+        .join("")}
+          </div>
         </div>`
       : "";
 
-  return `
-    <div class="detail-section" data-section="${section.id || sectionIndex}">
-      <div class="detail-section-header">
-        <h3 class="section-title-main">${section.title || ""}</h3>
-      </div>
-      <div class="detail-section-body">
-        ${summary}
-        ${bullets}
-        ${metrics}
-        ${images}
-      </div>
-    </div>
-  `;
-}
-
-function buildFallbackSections(project, projectId) {
-  // Role
-  const roleSection =
-    project.role && project.role.length > 0
-      ? `
-    <div class="project-highlight-section role-section">
-      <h3 class="section-title-main">👤 담당 역할</h3>
-      <ul class="highlight-list">
-        ${project.role.map((role) => `<li>${role}</li>`).join("")}
-      </ul>
-    </div>
-  `
-      : "";
-
-  // Contribution
-  const contributionSection =
-    project.contribution && project.contribution.length > 0
-      ? `
-    <div class="project-highlight-section contribution-section">
-      <h3 class="section-title-main">💡 주요 기여</h3>
-      <ul class="highlight-list">
-        ${project.contribution.map((contrib) => `<li>${contrib}</li>`).join("")}
-      </ul>
-    </div>
-  `
-      : "";
-
-  // Achievements
-  const achievementsSection =
-    project.achievements && project.achievements.length > 0
-      ? `
-    <div class="project-highlight-section achievements-section">
-      <h3 class="section-title-main">🏆 주요 성과</h3>
-      <div class="achievements-grid">
-        ${project.achievements
-          .map(
-            (achievement) => `
-          <div class="achievement-card ${achievement.type}">
-            <div class="achievement-metric">${achievement.metric}</div>
-            <div class="achievement-value">${achievement.value}</div>
-          </div>
-        `
-          )
-          .join("")}
-      </div>
-    </div>
-  `
-      : "";
-
-  // Problem solving
-  const problemSolvingSection =
-    project.problemSolving && project.problemSolving.length > 0
-      ? `
-    <div class="project-highlight-section problem-solving-section">
-      <h3 class="section-title-main">🔧 문제 해결 과정</h3>
-      ${project.problemSolving
-        .map(
-          (problem, index) => `
-        <div class="problem-solving-item">
-          <div class="problem-header">
-            <span class="problem-number">문제 ${index + 1}</span>
-          </div>
-          <div class="problem-content">
-            <div class="problem-item">
-              <strong class="problem-label">❌ 문제상황:</strong>
-              <p>${problem.problem}</p>
-            </div>
-            <div class="problem-item">
-              <strong class="problem-label">🔍 원인 분석:</strong>
-              <p>${problem.cause}</p>
-            </div>
-            <div class="problem-item">
-              <strong class="problem-label">✅ 해결책:</strong>
-              <p>${problem.solution}</p>
-            </div>
-            <div class="problem-item">
-              <strong class="problem-label">📊 해결 과정:</strong>
-              <p>${problem.process}</p>
-            </div>
-          </div>
-        </div>
-      `
-        )
-        .join("")}
-    </div>
-  `
-      : "";
-
-  // Learnings
-  const learningsSection =
-    project.learnings && project.learnings.length > 0
-      ? `
-    <div class="project-highlight-section learnings-section">
-      <h3 class="section-title-main">📚 얻은 것</h3>
-      <ul class="learnings-list">
-        ${project.learnings.map((learning) => `<li>${learning}</li>`).join("")}
-      </ul>
-    </div>
-  `
-      : "";
-
-  // Misc sections
-  const sectionsBlock =
-    project.sections && project.sections.length > 0
-      ? `
-    <div class="project-sections">
-      ${project.sections
-        .map(
-          (section) => `
-        <div class="project-section">
-          <h3 class="section-title-sub">${section.title}</h3>
-          <div class="section-content">${section.content}</div>
-        </div>
-      `
-        )
-        .join("")}
-    </div>
-  `
-      : "";
-
-  // Images
-  const imagesBlock =
-    project.images && project.images.length > 0
-      ? `
-    <div class="project-images">
-      <h3 class="section-title-sub">🖼️ 프로젝트 이미지</h3>
-      <div class="images-gallery">
-        ${project.images
-          .map(
-            (img, index) => `
-            <div class="gallery-item">
-              <img src="${img.path}" alt="${img.alt || ""}" class="gallery-image" onclick="openImageModal(${index}, '${projectId}')" />
-              ${img.caption ? `<p class="image-caption">${img.caption}</p>` : ""}
-            </div>
-        `
-          )
-          .join("")}
-      </div>
-    </div>
-  `
-      : "";
+  // Organic layout: Text on left, Images on right (if images exist)
+  const hasImages = section.images && section.images.length > 0;
 
   return `
-    ${roleSection}
-    ${contributionSection}
-    ${achievementsSection}
-    ${problemSolvingSection}
-    ${learningsSection}
-    ${sectionsBlock}
-    ${imagesBlock}
+    <div class="organic-section ${hasImages ? 'has-images' : ''}" data-section="${section.id || sectionIndex}">
+      <div class="section-content-wrapper">
+        <div class="detail-section-header">
+          <h3 class="section-title-main">${section.title || ""}</h3>
+        </div>
+        <div class="detail-section-body">
+          ${summary}
+          ${bullets}
+          ${metrics}
+        </div>
+      </div>
+      ${images}
+    </div>
   `;
 }
 
@@ -347,11 +200,11 @@ async function openProjectModal(projectId) {
       ? `
         <div class="project-detail-sections">
           ${project.detailSections
-            .map((section, idx) => buildDetailSection(projectId, section, idx))
-            .join("")}
+        .map((section, idx) => buildDetailSection(projectId, section, idx))
+        .join("")}
         </div>
       `
-      : buildFallbackSections(project, projectId);
+      : "";
 
   modal.innerHTML = `
         <div class="modal-overlay" onclick="closeProjectModal()"></div>
@@ -373,7 +226,7 @@ async function openProjectModal(projectId) {
             <div class="modal-body">
                 ${project.overview ? `
                 <div class="project-overview-section">
-                  <h3 class="section-title-main">📋 프로젝트 소개</h3>
+                  <h3 class="section-title-main"> 프로젝트 소개</h3>
                   <p class="overview-text">${project.overview}</p>
                 </div>
                 ` : ''}
@@ -384,11 +237,11 @@ async function openProjectModal(projectId) {
                     <h3 class="section-title-sub">🛠️ 사용 기술</h3>
                     <div class="tech-list">
                         ${project.technologies
-                          .map(
-                            (tech) =>
-                              `<span class="tech-item ${tech.level}">${tech.name}</span>`
-                          )
-                          .join("")}
+      .map(
+        (tech) =>
+          `<span class="tech-item ${tech.level}">${tech.name}</span>`
+      )
+      .join("")}
                     </div>
                 </div>
                 
@@ -397,20 +250,20 @@ async function openProjectModal(projectId) {
                     <h3 class="section-title-sub">📁 관련 자료</h3>
                     <div class="files-list">
                         ${project.files
-                          .map(
-                            (file) => {
-                              const isHtml = file.type && file.type.toLowerCase() === 'html';
-                              const fileIcon = isHtml ? '🌐' : '📄';
-                              return `
+        .map(
+          (file) => {
+            const isHtml = file.type && file.type.toLowerCase() === 'html';
+            const fileIcon = isHtml ? '🌐' : '📄';
+            return `
                             <a href="${file.path}" class="file-link" ${isHtml ? 'target="_blank" rel="noopener noreferrer"' : 'download'}>
                                 <span class="file-icon">${fileIcon}</span>
                                 <span class="file-name">${file.name}</span>
                                 <span class="file-type">${file.type ? file.type.toUpperCase() : ''}</span>
                             </a>
                         `;
-                            }
-                          )
-                          .join("")}
+          }
+        )
+        .join("")}
                     </div>
                 </div>
                 ` : ''}
@@ -420,11 +273,11 @@ async function openProjectModal(projectId) {
                     <h3 class="section-title-sub">🔗 관련 링크</h3>
                     <div class="links-list">
                         ${project.links
-                          .map(
-                            (link) =>
-                              `<a href="${link.url}" class="project-link" target="_blank">${link.name}</a>`
-                          )
-                          .join("")}
+        .map(
+          (link) =>
+            `<a href="${link.url}" class="project-link" target="_blank">${link.name}</a>`
+        )
+        .join("")}
                     </div>
                 </div>
                 ` : ''}
@@ -473,9 +326,8 @@ function showImageModal(images, startIndex = 0) {
     ? `<button class="image-nav-btn image-nav-next" onclick="navigateImage(1)">›</button>`
     : "";
   const imageCounter = hasMultiple
-    ? `<div class="image-counter">${currentImageIndex + 1} / ${
-        currentProjectImages.length
-      }</div>`
+    ? `<div class="image-counter">${currentImageIndex + 1} / ${currentProjectImages.length
+    }</div>`
     : "";
 
   imageModal.innerHTML = `
@@ -525,8 +377,8 @@ async function openImageModalFromSection(projectId, sectionIndex, imageIndex) {
   const project = projectsData.find((p) => p.id === projectId);
   const section =
     project &&
-    project.detailSections &&
-    project.detailSections.length > sectionIndex
+      project.detailSections &&
+      project.detailSections.length > sectionIndex
       ? project.detailSections[sectionIndex]
       : null;
   if (!section || !section.images || section.images.length === 0) return;
@@ -621,8 +473,7 @@ function renderProjects(projects) {
   projectsContainer.innerHTML = projects
     .map(
       (project) => `
-        <div class="project-card scroll-reveal" onclick="openProjectModal('${
-          project.id
+        <div class="project-card scroll-reveal" onclick="openProjectModal('${project.id
         }')">
             <div class="project-content">
                 <h3 class="project-title">${project.title}</h3>
@@ -633,19 +484,17 @@ function renderProjects(projects) {
                 <p class="project-description">${project.description}</p>
                 <div class="project-tech-preview">
                     ${project.technologies
-                      .slice(0, 4)
-                      .map(
-                        (tech) =>
-                          `<span class="tech-tag ${tech.level}">${tech.name}</span>`
-                      )
-                      .join("")}
-                    ${
-                      project.technologies.length > 4
-                        ? `<span class="tech-tag more">+${
-                            project.technologies.length - 4
-                          }</span>`
-                        : ""
-                    }
+          .slice(0, 4)
+          .map(
+            (tech) =>
+              `<span class="tech-tag ${tech.level}">${tech.name}</span>`
+          )
+          .join("")}
+                    ${project.technologies.length > 4
+          ? `<span class="tech-tag more">+${project.technologies.length - 4
+          }</span>`
+          : ""
+        }
                 </div>
                 <div class="project-footer">
                     <span class="view-details">자세히 보기 →</span>
@@ -668,11 +517,11 @@ function renderSkills(skills) {
             <h3>${getCategoryTitle(category)}</h3>
             <div class="tech-list">
                 ${items
-                  .map(
-                    (item) =>
-                      `<span class="tech-item ${item.level}">${item.name}</span>`
-                  )
-                  .join("")}
+          .map(
+            (item) =>
+              `<span class="tech-item ${item.level}">${item.name}</span>`
+          )
+          .join("")}
             </div>
         </div>
     `
@@ -724,15 +573,15 @@ function initHeroAnimations() {
 function initImageSlider() {
   const slideImages = document.querySelectorAll('.slide-image');
   let currentIndex = 0;
-  
+
   function updateSlidePositions() {
     slideImages.forEach((img, index) => {
       // Remove all position classes
       img.classList.remove('current', 'next', 'prev', 'hidden', 'sliding-out', 'sliding-in');
-      
+
       // Calculate relative position
       const relativeIndex = (index - currentIndex + slideImages.length) % slideImages.length;
-      
+
       // Apply appropriate class based on position
       if (relativeIndex === 0) {
         img.classList.add('current');
@@ -744,29 +593,29 @@ function initImageSlider() {
       }
     });
   }
-  
+
   function slideToNext() {
     const currentImage = slideImages[currentIndex];
     const nextIndex = (currentIndex + 1) % slideImages.length;
     const nextImage = slideImages[nextIndex];
-    
+
     // Set up sliding animation
     currentImage.classList.remove('current');
     currentImage.classList.add('sliding-out');
-    
+
     nextImage.classList.remove('next');
     nextImage.classList.add('sliding-in');
-    
+
     // After animation completes, update positions
     setTimeout(() => {
       currentIndex = nextIndex;
       updateSlidePositions();
     }, 1000); // Match CSS transition duration
   }
-  
+
   // Initialize slider
   updateSlidePositions();
-  
+
   // Start auto-slide (change every 3 seconds)
   setInterval(slideToNext, 3000);
 }

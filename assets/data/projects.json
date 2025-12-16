@@ -8,14 +8,38 @@
       "description": "생성형 AI 기반 뉴스 점수화 플랫폼",
       "overview": "Facticle은 가짜 뉴스와 정보 과다로 인한 문제를 해결하기 위해 개발된 플랫폼입니다. 사용자가 뉴스 기사를 읽기 전에 AI가 자동으로 핵심 내용을 요약하고, 여러 출처의 데이터를 비교하여 사실성을 분석해 신뢰도 점수를 제공합니다. 이를 통해 사용자는 신뢰할 수 있는 정보만 빠르게 파악할 수 있습니다.",
       "technologies": [
-        { "name": "Spring Boot", "level": "primary" },
-        { "name": "React", "level": "primary" },
-        { "name": "MySQL", "level": "primary" },
-        { "name": "Azure", "level": "primary" },
-        { "name": "Docker", "level": "primary" },
-        { "name": "Python", "level": "secondary" },
-        { "name": "OpenAI GPT", "level": "secondary" },
-        { "name": "ElasticSearch", "level": "secondary" }
+        {
+          "name": "Spring Boot",
+          "level": "primary"
+        },
+        {
+          "name": "React",
+          "level": "primary"
+        },
+        {
+          "name": "MySQL",
+          "level": "primary"
+        },
+        {
+          "name": "Azure",
+          "level": "primary"
+        },
+        {
+          "name": "Docker",
+          "level": "primary"
+        },
+        {
+          "name": "Python",
+          "level": "secondary"
+        },
+        {
+          "name": "OpenAI GPT",
+          "level": "secondary"
+        },
+        {
+          "name": "ElasticSearch",
+          "level": "secondary"
+        }
       ],
       "role": [
         "백엔드 아키텍처 설계 및 전체 시스템 구조 설계",
@@ -34,10 +58,26 @@
         "팀원과의 협업을 통한 프론트엔드-백엔드 API 인터페이스 설계"
       ],
       "achievements": [
-        { "metric": "AI 요약 품질 개선", "value": "불필요 문장 생성률 30% 감소", "type": "improvement" },
-        { "metric": "검색 속도 향상", "value": "10~18배 성능 개선", "type": "performance" },
-        { "metric": "뉴스 수집 규모", "value": "일일 10,000+ 기사 자동 수집", "type": "scale" },
-        { "metric": "API 응답 시간", "value": "평균 200ms 이하 유지", "type": "performance" }
+        {
+          "metric": "AI 요약 품질 개선",
+          "value": "불필요 문장 생성률 30% 감소",
+          "type": "improvement"
+        },
+        {
+          "metric": "검색 속도 향상",
+          "value": "10~18배 성능 개선",
+          "type": "performance"
+        },
+        {
+          "metric": "뉴스 수집 규모",
+          "value": "일일 10,000+ 기사 자동 수집",
+          "type": "scale"
+        },
+        {
+          "metric": "API 응답 시간",
+          "value": "평균 200ms 이하 유지",
+          "type": "performance"
+        }
       ],
       "problemSolving": [
         {
@@ -89,18 +129,6 @@
           ]
         },
         {
-          "id": "architecture",
-          "title": "아키텍처",
-          "summary": "Spring Boot + React 기반의 모놀리식 코어에 Python 크롤러, ElasticSearch 검색, OpenAI GPT 연동을 포함한 컨테이너 배포 구조",
-          "images": [
-            {
-              "path": "images/projects/facticle/architecture.png",
-              "alt": "Facticle 아키텍처",
-              "caption": "서비스 아키텍처"
-            }
-          ]
-        },
-        {
           "id": "role",
           "title": "담당 역할",
           "bullets": [
@@ -114,6 +142,18 @@
           ]
         },
         {
+          "id": "architecture",
+          "title": "아키텍처",
+          "summary": "Spring Boot + React 기반의 모놀리식 코어에 Python 크롤러, ElasticSearch 검색, OpenAI GPT 연동을 포함한 컨테이너 배포 구조",
+          "images": [
+            {
+              "path": "images/projects/facticle/architecture.png",
+              "alt": "Facticle 아키텍처",
+              "caption": "서비스 아키텍처"
+            }
+          ]
+        },
+        {
           "id": "achievements",
           "title": "성과",
           "bullets": [
@@ -122,10 +162,26 @@
             "일일 1만+ 뉴스 자동 수집 파이프라인 운영"
           ],
           "metrics": [
-            { "metric": "AI 요약 품질 개선", "value": "불필요 문장 생성률 30% 감소", "type": "improvement" },
-            { "metric": "검색 속도 향상", "value": "10~18배 성능 개선", "type": "performance" },
-            { "metric": "뉴스 수집 규모", "value": "일일 10,000+ 기사 자동 수집", "type": "scale" },
-            { "metric": "API 응답 시간", "value": "평균 200ms 이하 유지", "type": "performance" }
+            {
+              "metric": "AI 요약 품질 개선",
+              "value": "불필요 문장 생성률 30% 감소",
+              "type": "improvement"
+            },
+            {
+              "metric": "검색 속도 향상",
+              "value": "10~18배 성능 개선",
+              "type": "performance"
+            },
+            {
+              "metric": "뉴스 수집 규모",
+              "value": "일일 10,000+ 기사 자동 수집",
+              "type": "scale"
+            },
+            {
+              "metric": "API 응답 시간",
+              "value": "평균 200ms 이하 유지",
+              "type": "performance"
+            }
           ]
         },
         {
@@ -153,7 +209,10 @@
       ],
       "files": [],
       "links": [
-        { "name": "GitHub", "url": "https://github.com/Namwoosung/Facticle" }
+        {
+          "name": "GitHub",
+          "url": "https://github.com/Namwoosung/Facticle"
+        }
       ]
     },
     {
@@ -164,11 +223,26 @@
       "description": "대학생 맞춤 진로 및 공모전 추천 + 커뮤니티 연결 플랫폼",
       "overview": "UNUS는 대학생들이 자신의 관심사와 전공에 맞는 멘토를 찾고, 관련 공모전이나 대외활동을 추천받으며, 비슷한 관심사를 가진 동료들과 소통할 수 있는 통합 플랫폼입니다. AI 기반 추천 시스템을 통해 사용자의 자기소개만으로도 맞춤형 추천을 제공하여 진로 탐색의 진입 장벽을 낮추는 것을 목표로 합니다.",
       "technologies": [
-        { "name": "Spring Boot", "level": "primary" },
-        { "name": "Flutter", "level": "primary" },
-        { "name": "Python (FastAPI)", "level": "primary" },
-        { "name": "SBERT + Machine Learning", "level": "secondary" },
-        { "name": "Docker / Docker-Compose", "level": "secondary" }
+        {
+          "name": "Spring Boot",
+          "level": "primary"
+        },
+        {
+          "name": "Flutter",
+          "level": "primary"
+        },
+        {
+          "name": "Python (FastAPI)",
+          "level": "primary"
+        },
+        {
+          "name": "SBERT + Machine Learning",
+          "level": "secondary"
+        },
+        {
+          "name": "Docker / Docker-Compose",
+          "level": "secondary"
+        }
       ],
       "role": [
         "Spring Boot 기반 백엔드 API 설계 및 개발 (인증, 사용자 관리, 추천 API 등)",
@@ -187,10 +261,26 @@
         "팀원들과의 협업을 통한 API 스펙 정의 및 프론트엔드 연동"
       ],
       "achievements": [
-        { "metric": "Cold-start 해결", "value": "자기소개만으로 추천 가능", "type": "feature" },
-        { "metric": "추천 정확도", "value": "사용자 만족도 85% 이상", "type": "quality" },
-        { "metric": "API 응답 시간", "value": "추천 API 평균 500ms 이하", "type": "performance" },
-        { "metric": "배포 성공", "value": "실제 작동하는 풀스택 앱 배포 완료", "type": "deployment" }
+        {
+          "metric": "Cold-start 해결",
+          "value": "자기소개만으로 추천 가능",
+          "type": "feature"
+        },
+        {
+          "metric": "추천 정확도",
+          "value": "사용자 만족도 85% 이상",
+          "type": "quality"
+        },
+        {
+          "metric": "API 응답 시간",
+          "value": "추천 API 평균 500ms 이하",
+          "type": "performance"
+        },
+        {
+          "metric": "배포 성공",
+          "value": "실제 작동하는 풀스택 앱 배포 완료",
+          "type": "deployment"
+        }
       ],
       "problemSolving": [
         {
@@ -243,18 +333,16 @@
               "path": "images/projects/unus/page_2.png",
               "alt": "UNUS 페이지 2",
               "caption": "커뮤니티/채팅 화면"
-            }
-          ]
-        },
-        {
-          "id": "architecture",
-          "title": "아키텍처",
-          "summary": "Spring Boot API와 FastAPI 추천 마이크로서비스, Flutter 클라이언트, MySQL, Docker Compose 기반 멀티 컨테이너 배포",
-          "images": [
+            },
             {
-              "path": "images/projects/unus/architecture.png",
-              "alt": "UNUS 아키텍처",
-              "caption": "서비스 아키텍처"
+              "path": "images/projects/unus/page_3.png",
+              "alt": "UNUS 페이지 3",
+              "caption": "주요 기능 화면 3"
+            },
+            {
+              "path": "images/projects/unus/page_4.png",
+              "alt": "UNUS 페이지 4",
+              "caption": "주요 기능 화면 4"
             }
           ]
         },
@@ -272,6 +360,18 @@
           ]
         },
         {
+          "id": "architecture",
+          "title": "아키텍처",
+          "summary": "Spring Boot API와 FastAPI 추천 마이크로서비스, Flutter 클라이언트, MySQL, Docker Compose 기반 멀티 컨테이너 배포",
+          "images": [
+            {
+              "path": "images/projects/unus/architecture.png",
+              "alt": "UNUS 아키텍처",
+              "caption": "서비스 아키텍처"
+            }
+          ]
+        },
+        {
           "id": "achievements",
           "title": "성과",
           "bullets": [
@@ -280,10 +380,26 @@
             "배포: 실제 작동하는 풀스택 앱 Docker Compose로 배포"
           ],
           "metrics": [
-            { "metric": "Cold-start 해결", "value": "자기소개만으로 추천 가능", "type": "feature" },
-            { "metric": "추천 정확도", "value": "사용자 만족도 85% 이상", "type": "quality" },
-            { "metric": "API 응답 시간", "value": "추천 API 평균 500ms 이하", "type": "performance" },
-            { "metric": "배포 성공", "value": "실제 작동하는 풀스택 앱 배포 완료", "type": "deployment" }
+            {
+              "metric": "Cold-start 해결",
+              "value": "자기소개만으로 추천 가능",
+              "type": "feature"
+            },
+            {
+              "metric": "추천 정확도",
+              "value": "사용자 만족도 85% 이상",
+              "type": "quality"
+            },
+            {
+              "metric": "API 응답 시간",
+              "value": "추천 API 평균 500ms 이하",
+              "type": "performance"
+            },
+            {
+              "metric": "배포 성공",
+              "value": "실제 작동하는 풀스택 앱 배포 완료",
+              "type": "deployment"
+            }
           ]
         },
         {
@@ -352,8 +468,14 @@
         }
       ],
       "links": [
-        { "name": "GitHub", "url": "https://github.com/DPChanny/unus" },
-        { "name": "기술 문서", "url": "https://dpchanny.tistory.com/3" }
+        {
+          "name": "GitHub",
+          "url": "https://github.com/DPChanny/unus"
+        },
+        {
+          "name": "기술 문서",
+          "url": "https://dpchanny.tistory.com/3"
+        }
       ]
     },
     {
@@ -364,12 +486,30 @@
       "description": "Spring, Node.js, FastAPI 기반 WebSocket 서버의 구조적 차이에 따른 성능을 정량적으로 비교한 연구",
       "overview": "실시간 협업 시스템에서 WebSocket 서버의 성능은 전체 시스템의 품질을 결정하는 핵심 요소입니다. 본 연구는 Spring WebSocket, Spring STOMP, Node.js, FastAPI 등 다양한 프레임워크를 동일한 조건에서 구현하고, 대규모 사용자 환경에서의 성능을 정량적으로 비교 분석하여 실시간 시스템 구축 시 최적의 프레임워크 선택 기준을 제시합니다.",
       "technologies": [
-        { "name": "Java (Spring WebSocket / STOMP)", "level": "primary" },
-        { "name": "Node.js (ws)", "level": "primary" },
-        { "name": "Python (FastAPI WebSocket)", "level": "secondary" },
-        { "name": "k6", "level": "secondary" },
-        { "name": "Docker", "level": "primary" },
-        { "name": "Grafana / VictoriaMetrics", "level": "secondary" }
+        {
+          "name": "Java (Spring WebSocket / STOMP)",
+          "level": "primary"
+        },
+        {
+          "name": "Node.js (ws)",
+          "level": "primary"
+        },
+        {
+          "name": "Python (FastAPI WebSocket)",
+          "level": "secondary"
+        },
+        {
+          "name": "k6",
+          "level": "secondary"
+        },
+        {
+          "name": "Docker",
+          "level": "primary"
+        },
+        {
+          "name": "Grafana / VictoriaMetrics",
+          "level": "secondary"
+        }
       ],
       "role": [
         "연구 주제 선정 및 실험 설계",
@@ -388,10 +528,26 @@
         "실시간 시스템 구축을 위한 실용적 가이드라인 제시"
       ],
       "achievements": [
-        { "metric": "테스트 규모", "value": "최대 1,000명 동시 접속 시뮬레이션", "type": "scale" },
-        { "metric": "Spring 성능", "value": "1,000명 환경에서도 안정적 (손실률 < 1%)", "type": "performance" },
-        { "metric": "Node.js 성능", "value": "500명까지 효율적, 이후 지연 증가", "type": "performance" },
-        { "metric": "연구 완성도", "value": "정량적 비교 및 구조적 분석 완료", "type": "quality" }
+        {
+          "metric": "테스트 규모",
+          "value": "최대 1,000명 동시 접속 시뮬레이션",
+          "type": "scale"
+        },
+        {
+          "metric": "Spring 성능",
+          "value": "1,000명 환경에서도 안정적 (손실률 < 1%)",
+          "type": "performance"
+        },
+        {
+          "metric": "Node.js 성능",
+          "value": "500명까지 효율적, 이후 지연 증가",
+          "type": "performance"
+        },
+        {
+          "metric": "연구 완성도",
+          "value": "정량적 비교 및 구조적 분석 완료",
+          "type": "quality"
+        }
       ],
       "problemSolving": [
         {
@@ -451,18 +607,6 @@
           ]
         },
         {
-          "id": "architecture",
-          "title": "아키텍처",
-          "summary": "각 프레임워크별 동일 실험 환경을 위한 Docker 기반 배포와 Grafana/VictoriaMetrics 수집 파이프라인 구성",
-          "images": [
-            {
-              "path": "images/projects/websocket_study/architecture.png",
-              "alt": "WebSocket 서버 아키텍처",
-              "caption": "실험 아키텍처 구성도"
-            }
-          ]
-        },
-        {
           "id": "role",
           "title": "담당 역할",
           "bullets": [
@@ -476,6 +620,18 @@
           ]
         },
         {
+          "id": "architecture",
+          "title": "아키텍처",
+          "summary": "각 프레임워크별 동일 실험 환경을 위한 Docker 기반 배포와 Grafana/VictoriaMetrics 수집 파이프라인 구성",
+          "images": [
+            {
+              "path": "images/projects/websocket_study/architecture.png",
+              "alt": "WebSocket 서버 아키텍처",
+              "caption": "실험 아키텍처 구성도"
+            }
+          ]
+        },
+        {
           "id": "achievements",
           "title": "성과",
           "bullets": [
@@ -485,10 +641,26 @@
             "FastAPI: 500명 이상에서 세션 유지 실패 및 손실률 증가 확인"
           ],
           "metrics": [
-            { "metric": "테스트 규모", "value": "최대 1,000명 동시 접속 시뮬레이션", "type": "scale" },
-            { "metric": "Spring 성능", "value": "1,000명 환경에서도 안정적 (손실률 < 1%)", "type": "performance" },
-            { "metric": "Node.js 성능", "value": "500명까지 효율적, 이후 지연 증가", "type": "performance" },
-            { "metric": "연구 완성도", "value": "정량적 비교 및 구조적 분석 완료", "type": "quality" }
+            {
+              "metric": "테스트 규모",
+              "value": "최대 1,000명 동시 접속 시뮬레이션",
+              "type": "scale"
+            },
+            {
+              "metric": "Spring 성능",
+              "value": "1,000명 환경에서도 안정적 (손실률 < 1%)",
+              "type": "performance"
+            },
+            {
+              "metric": "Node.js 성능",
+              "value": "500명까지 효율적, 이후 지연 증가",
+              "type": "performance"
+            },
+            {
+              "metric": "연구 완성도",
+              "value": "정량적 비교 및 구조적 분석 완료",
+              "type": "quality"
+            }
           ]
         },
         {
@@ -499,6 +671,38 @@
             "스레드/이벤트 루프 구조와 성능 지표를 매핑해 해석",
             "멀티 워커·Redis Pub/Sub 적용 시 오버헤드 영향 확인",
             "실시간 협업 시스템 구축 시 프레임워크 선택 기준 제시"
+          ],
+          "images": [
+            {
+              "path": "images/projects/websocket_study/spring_pure_temp.png",
+              "alt": "Spring WebSocket 성능",
+              "caption": "Spring WebSocket 성능 측정 결과"
+            },
+            {
+              "path": "images/projects/websocket_study/spring_stomp_temp.png",
+              "alt": "Spring STOMP 성능",
+              "caption": "Spring STOMP 성능 측정 결과"
+            },
+            {
+              "path": "images/projects/websocket_study/node_pure_temp.png",
+              "alt": "Node.js WebSocket 성능",
+              "caption": "Node.js WebSocket 성능 측정 결과"
+            },
+            {
+              "path": "images/projects/websocket_study/node_pure_opt_temp.png",
+              "alt": "Node.js 최적화 성능",
+              "caption": "Node.js 멀티워커 최적화 결과"
+            },
+            {
+              "path": "images/projects/websocket_study/fastapi_pure_temp.png",
+              "alt": "FastAPI WebSocket 성능",
+              "caption": "FastAPI WebSocket 성능 측정 결과"
+            },
+            {
+              "path": "images/projects/websocket_study/fastapi_opt_temp.png",
+              "alt": "FastAPI 최적화 성능",
+              "caption": "FastAPI 최적화 결과"
+            }
           ]
         }
       ],
@@ -547,7 +751,10 @@
         }
       ],
       "links": [
-        { "name": "연구 보고서", "url": "#" }
+        {
+          "name": "연구 보고서",
+          "url": "#"
+        }
       ]
     },
     {
@@ -558,11 +765,26 @@
       "description": "대형 언어 모델을 활용한 과학 분야 다중 문서 요약 자동화 연구 및 평가 지표 개선",
       "overview": "체계적 문헌 고찰(Systematic Review)은 과학 연구에서 중요한 과정이지만, 수많은 논문을 읽고 요약하는 데 엄청난 시간과 노력이 필요합니다. 본 연구는 대형 언어 모델을 활용하여 과학 분야의 다중 문서를 자동으로 요약하고, 기존 평가 지표의 한계를 극복하는 새로운 평가 방안을 제시합니다.",
       "technologies": [
-        { "name": "GPT-4o-mini", "level": "primary" },
-        { "name": "Longformer Encoder-Decoder", "level": "primary" },
-        { "name": "Python", "level": "primary" },
-        { "name": "HuggingFace Transformers", "level": "secondary" },
-        { "name": "GEval / ROUGE / BERTScore", "level": "secondary" }
+        {
+          "name": "GPT-4o-mini",
+          "level": "primary"
+        },
+        {
+          "name": "Longformer Encoder-Decoder",
+          "level": "primary"
+        },
+        {
+          "name": "Python",
+          "level": "primary"
+        },
+        {
+          "name": "HuggingFace Transformers",
+          "level": "secondary"
+        },
+        {
+          "name": "GEval / ROUGE / BERTScore",
+          "level": "secondary"
+        }
       ],
       "role": [
         "연구 주제 선정 및 실험 설계",
@@ -581,10 +803,26 @@
         "과학 분야 자동화 연구의 새로운 방향 제시"
       ],
       "achievements": [
-        { "metric": "평가 지표 개선", "value": "GEval을 통한 의미적 평가 도입", "type": "methodology" },
-        { "metric": "GPT-4o-mini 성능", "value": "GEval 기준 최고 성능 달성", "type": "quality" },
-        { "metric": "데이터셋 규모", "value": "Cochrane 데이터셋 기반 대규모 실험", "type": "scale" },
-        { "metric": "연구 완성도", "value": "논문 작성 및 발표 완료", "type": "publication" }
+        {
+          "metric": "평가 지표 개선",
+          "value": "GEval을 통한 의미적 평가 도입",
+          "type": "methodology"
+        },
+        {
+          "metric": "GPT-4o-mini 성능",
+          "value": "GEval 기준 최고 성능 달성",
+          "type": "quality"
+        },
+        {
+          "metric": "데이터셋 규모",
+          "value": "Cochrane 데이터셋 기반 대규모 실험",
+          "type": "scale"
+        },
+        {
+          "metric": "연구 완성도",
+          "value": "논문 작성 및 발표 완료",
+          "type": "publication"
+        }
       ],
       "problemSolving": [
         {
@@ -640,12 +878,6 @@
           ]
         },
         {
-          "id": "architecture",
-          "title": "아키텍처",
-          "summary": "LED-16K 기반 문서별 요약 → GPT-4o-mini 종합 요약으로 이어지는 2단계 파이프라인과 GEval 기반 평가 플로우",
-          "images": []
-        },
-        {
           "id": "role",
           "title": "담당 역할",
           "bullets": [
@@ -659,6 +891,12 @@
           ]
         },
         {
+          "id": "architecture",
+          "title": "아키텍처",
+          "summary": "LED-16K 기반 문서별 요약 → GPT-4o-mini 종합 요약으로 이어지는 2단계 파이프라인과 GEval 기반 평가 플로우",
+          "images": []
+        },
+        {
           "id": "achievements",
           "title": "성과",
           "bullets": [
@@ -667,10 +905,26 @@
             "Cochrane 대규모 실험으로 결과 신뢰성 확보"
           ],
           "metrics": [
-            { "metric": "평가 지표 개선", "value": "GEval을 통한 의미적 평가 도입", "type": "methodology" },
-            { "metric": "GPT-4o-mini 성능", "value": "GEval 기준 최고 성능 달성", "type": "quality" },
-            { "metric": "데이터셋 규모", "value": "Cochrane 데이터셋 기반 대규모 실험", "type": "scale" },
-            { "metric": "연구 완성도", "value": "논문 작성 및 발표 완료", "type": "publication" }
+            {
+              "metric": "평가 지표 개선",
+              "value": "GEval을 통한 의미적 평가 도입",
+              "type": "methodology"
+            },
+            {
+              "metric": "GPT-4o-mini 성능",
+              "value": "GEval 기준 최고 성능 달성",
+              "type": "quality"
+            },
+            {
+              "metric": "데이터셋 규모",
+              "value": "Cochrane 데이터셋 기반 대규모 실험",
+              "type": "scale"
+            },
+            {
+              "metric": "연구 완성도",
+              "value": "논문 작성 및 발표 완료",
+              "type": "publication"
+            }
           ]
         },
         {
@@ -704,7 +958,10 @@
         }
       ],
       "links": [
-        { "name": "논문", "url": "#" }
+        {
+          "name": "논문",
+          "url": "#"
+        }
       ]
     }
   ]
