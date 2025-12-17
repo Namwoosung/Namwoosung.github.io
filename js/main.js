@@ -111,6 +111,51 @@ window.addEventListener("scroll", () => {
 let projectsData = [];
 
 function buildDetailSection(projectId, section, sectionIndex) {
+  // Handle new "items" structure for Achievements (Grouped Topic + Value + Description + Images)
+  if (section.items && section.items.length > 0) {
+    return `
+      <div class="organic-section achievements-section" data-section="${section.id || sectionIndex}">
+        <div class="section-content-wrapper">
+          <div class="detail-section-header">
+            <h3 class="section-title-main">${section.title || ""}</h3>
+          </div>
+          <div class="detail-section-body">
+            ${section.summary ? `<p class="detail-summary">${section.summary}</p>` : ""}
+            
+            <div class="achievements-list">
+              ${section.items.map((item, idx) => `
+                <div class="achievement-card">
+                  <div class="achievement-header">
+                    <div class="achievement-title-group">
+                      <div class="achievement-topic">${item.topic}</div>
+                      <div class="achievement-value">${item.value}</div>
+                    </div>
+                  </div>
+                  <div class="achievement-body">
+                    ${Array.isArray(item.description)
+        ? item.description.map(desc => `<p class="achievement-description">${desc}</p>`).join('')
+        : `<p class="achievement-description">${item.description}</p>`
+      }
+                    ${item.images && item.images.length > 0 ? `
+                      <div class="achievement-images">
+                        ${item.images.map((img, imgIdx) => `
+                          <figure class="achievement-image-wrapper" onclick="openAchievementImage('${projectId}', ${sectionIndex}, ${idx}, ${imgIdx})">
+                            <img src="${img.path}" alt="${img.alt || ''}" class="achievement-image" />
+                          </figure>
+                        `).join('')}
+                      </div>
+                    ` : ''}
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  // Legacy/Standard Render (for Intro, Role, Architecture, etc.)
   const summary = section.summary
     ? `<p class="detail-summary">${section.summary}</p>`
     : "";
@@ -168,15 +213,16 @@ function buildDetailSection(projectId, section, sectionIndex) {
   const hasImages = section.images && section.images.length > 0;
 
   return `
-    <div class="organic-section ${hasImages ? 'has-images' : ''}" data-section="${section.id || sectionIndex}">
+    <div class="organic-section ${hasImages ? "has-images" : ""
+    }" data-section="${section.id || sectionIndex}">
       <div class="section-content-wrapper">
         <div class="detail-section-header">
           <h3 class="section-title-main">${section.title || ""}</h3>
         </div>
         <div class="detail-section-body">
           ${summary}
-          ${bullets}
           ${metrics}
+          ${bullets}
         </div>
       </div>
       ${images}
@@ -195,16 +241,18 @@ async function openProjectModal(projectId) {
   const modal = document.createElement("div");
   modal.className = "project-modal";
 
-  const detailSections =
-    project.detailSections && project.detailSections.length > 0
-      ? `
-        <div class="project-detail-sections">
-          ${project.detailSections
-        .map((section, idx) => buildDetailSection(projectId, section, idx))
-        .join("")}
-        </div>
-      `
-      : "";
+  const introSection =
+    project.detailSections &&
+    project.detailSections.find((s) => s.id === "intro");
+  const architectureSection =
+    project.detailSections &&
+    project.detailSections.find((s) => s.id === "architecture");
+  const roleSection =
+    project.detailSections &&
+    project.detailSections.find((s) => s.id === "role");
+  const achievementsSection =
+    project.detailSections &&
+    project.detailSections.find((s) => s.id === "achievements");
 
   modal.innerHTML = `
         <div class="modal-overlay" onclick="closeProjectModal()"></div>
@@ -224,17 +272,23 @@ async function openProjectModal(projectId) {
                 <button class="modal-close" onclick="closeProjectModal()">×</button>
             </div>
             <div class="modal-body">
-                ${project.overview ? `
+                ${project.overview
+      ? `
                 <div class="project-overview-section">
                   <h3 class="section-title-main"> 프로젝트 소개</h3>
                   <p class="overview-text">${project.overview}</p>
                 </div>
-                ` : ''}
+                `
+      : ""
+    }
 
-                ${detailSections}
+                ${introSection
+      ? buildDetailSection(projectId, introSection, 0)
+      : ""
+    }
 
                 <div class="project-technologies">
-                    <h3 class="section-title-sub">🛠️ 사용 기술</h3>
+                    <h3 class="section-title-sub">사용 기술</h3>
                     <div class="tech-list">
                         ${project.technologies
       .map(
@@ -244,33 +298,55 @@ async function openProjectModal(projectId) {
       .join("")}
                     </div>
                 </div>
+
+                ${architectureSection
+      ? buildDetailSection(projectId, architectureSection, 1)
+      : ""
+    }
                 
-                ${project.files && project.files.length > 0 ? `
+                ${roleSection
+      ? buildDetailSection(projectId, roleSection, 2)
+      : ""
+    }
+
+                ${achievementsSection
+      ? buildDetailSection(projectId, achievementsSection, 3)
+      : ""
+    }
+                
+                ${project.files && project.files.length > 0
+      ? `
                 <div class="project-files">
-                    <h3 class="section-title-sub">📁 관련 자료</h3>
+                    <h3 class="section-title-sub">관련 자료</h3>
                     <div class="files-list">
                         ${project.files
-        .map(
-          (file) => {
-            const isHtml = file.type && file.type.toLowerCase() === 'html';
-            const fileIcon = isHtml ? '🌐' : '📄';
-            return `
-                            <a href="${file.path}" class="file-link" ${isHtml ? 'target="_blank" rel="noopener noreferrer"' : 'download'}>
+        .map((file) => {
+          const isHtml =
+            file.type && file.type.toLowerCase() === "html";
+          const fileIcon = isHtml ? "🌐" : "📄";
+          return `
+                            <a href="${file.path}" class="file-link" ${isHtml
+              ? 'target="_blank" rel="noopener noreferrer"'
+              : "download"
+            }>
                                 <span class="file-icon">${fileIcon}</span>
                                 <span class="file-name">${file.name}</span>
-                                <span class="file-type">${file.type ? file.type.toUpperCase() : ''}</span>
+                                <span class="file-type">${file.type ? file.type.toUpperCase() : ""
+            }</span>
                             </a>
                         `;
-          }
-        )
+        })
         .join("")}
                     </div>
                 </div>
-                ` : ''}
+                `
+      : ""
+    }
                 
-                ${project.links && project.links.length > 0 ? `
+                ${project.links && project.links.length > 0
+      ? `
                 <div class="project-links">
-                    <h3 class="section-title-sub">🔗 관련 링크</h3>
+                    <h3 class="section-title-sub">관련 링크</h3>
                     <div class="links-list">
                         ${project.links
         .map(
@@ -280,7 +356,9 @@ async function openProjectModal(projectId) {
         .join("")}
                     </div>
                 </div>
-                ` : ''}
+                `
+      : ""
+    }
             </div>
         </div>
     `;
@@ -335,10 +413,14 @@ function showImageModal(images, startIndex = 0) {
     <div class="image-modal-content">
       <button class="image-modal-close" onclick="closeImageModal()">×</button>
       ${prevButton}
-      <img src="${image.path}" alt="${image.caption || image.alt || ""}" class="modal-full-image" />
+      <img src="${image.path}" alt="${image.caption || image.alt || ""
+    }" class="modal-full-image" />
       ${nextButton}
       ${imageCounter}
-      ${image.caption ? `<p class="modal-image-caption">${image.caption}</p>` : ""}
+      ${image.caption
+      ? `<p class="modal-image-caption">${image.caption}</p>`
+      : ""
+    }
     </div>
   `;
 
@@ -358,17 +440,6 @@ function showImageModal(images, startIndex = 0) {
   }, 10);
 }
 
-async function openImageModal(imageIndex, projectId) {
-  if (projectsData.length === 0) {
-    projectsData = await loadProjectsData();
-  }
-
-  const project = projectsData.find((p) => p.id === projectId);
-  if (!project || !project.images || project.images.length === 0) return;
-
-  showImageModal(project.images, imageIndex);
-}
-
 async function openImageModalFromSection(projectId, sectionIndex, imageIndex) {
   if (projectsData.length === 0) {
     projectsData = await loadProjectsData();
@@ -386,11 +457,30 @@ async function openImageModalFromSection(projectId, sectionIndex, imageIndex) {
   showImageModal(section.images, imageIndex);
 }
 
+async function openAchievementImage(projectId, sectionIndex, itemIndex, imageIndex) {
+  if (projectsData.length === 0) {
+    projectsData = await loadProjectsData();
+  }
+
+  const project = projectsData.find((p) => p.id === projectId);
+  const section =
+    project &&
+      project.detailSections &&
+      project.detailSections.length > sectionIndex
+      ? project.detailSections[sectionIndex]
+      : null;
+
+  if (!section || !section.items || !section.items[itemIndex] || !section.items[itemIndex].images) return;
+
+  showImageModal(section.items[itemIndex].images, imageIndex);
+}
+
 function navigateImage(direction) {
   if (currentProjectImages.length === 0) return;
 
   currentImageIndex += direction;
-  if (currentImageIndex < 0) currentImageIndex = currentProjectImages.length - 1;
+  if (currentImageIndex < 0)
+    currentImageIndex = currentProjectImages.length - 1;
   if (currentImageIndex >= currentProjectImages.length) currentImageIndex = 0;
 
   const image = currentProjectImages[currentImageIndex];
@@ -409,7 +499,8 @@ function navigateImage(direction) {
       caption.style.display = image.caption ? "block" : "none";
     }
     if (counter) {
-      counter.textContent = `${currentImageIndex + 1} / ${currentProjectImages.length}`;
+      counter.textContent = `${currentImageIndex + 1} / ${currentProjectImages.length
+        }`;
     }
     img.style.opacity = "1";
   }, 150);
@@ -571,25 +662,33 @@ function initHeroAnimations() {
 
 // Image slider functionality
 function initImageSlider() {
-  const slideImages = document.querySelectorAll('.slide-image');
+  const slideImages = document.querySelectorAll(".slide-image");
   let currentIndex = 0;
 
   function updateSlidePositions() {
     slideImages.forEach((img, index) => {
       // Remove all position classes
-      img.classList.remove('current', 'next', 'prev', 'hidden', 'sliding-out', 'sliding-in');
+      img.classList.remove(
+        "current",
+        "next",
+        "prev",
+        "hidden",
+        "sliding-out",
+        "sliding-in"
+      );
 
       // Calculate relative position
-      const relativeIndex = (index - currentIndex + slideImages.length) % slideImages.length;
+      const relativeIndex =
+        (index - currentIndex + slideImages.length) % slideImages.length;
 
       // Apply appropriate class based on position
       if (relativeIndex === 0) {
-        img.classList.add('current');
+        img.classList.add("current");
       } else if (relativeIndex === 1) {
-        img.classList.add('next');
+        img.classList.add("next");
       } else {
         // Hide the third image completely to avoid showing it on the right
-        img.classList.add('hidden');
+        img.classList.add("hidden");
       }
     });
   }
@@ -600,11 +699,11 @@ function initImageSlider() {
     const nextImage = slideImages[nextIndex];
 
     // Set up sliding animation
-    currentImage.classList.remove('current');
-    currentImage.classList.add('sliding-out');
+    currentImage.classList.remove("current");
+    currentImage.classList.add("sliding-out");
 
-    nextImage.classList.remove('next');
-    nextImage.classList.add('sliding-in');
+    nextImage.classList.remove("next");
+    nextImage.classList.add("sliding-in");
 
     // After animation completes, update positions
     setTimeout(() => {
