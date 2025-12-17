@@ -487,10 +487,10 @@
     {
       "id": "multi-doc-sum",
       "title": "과학 분야 다중 문서 요약을 위한 개선된 요약 및 평가 방안 연구",
-      "period": "2024.03 - 2024.12",
-      "team": "연구 프로젝트",
+      "period": "2024.09 - 2024.12",
+      "team": "팀 연구 프로젝트(3명)",
       "description": "대형 언어 모델을 활용한 과학 분야 다중 문서 요약 자동화 연구 및 평가 지표 개선",
-      "overview": "체계적 문헌 고찰(Systematic Review)은 과학 연구에서 중요한 과정이지만, 수많은 논문을 읽고 요약하는 데 엄청난 시간과 노력이 필요합니다. 본 연구는 대형 언어 모델을 활용하여 과학 분야의 다중 문서를 자동으로 요약하고, 기존 평가 지표의 한계를 극복하는 새로운 평가 방안을 제시합니다.",
+      "overview": "체계적 문헌 고찰(Systematic Literature Review, SLR)은 특정 연구 질문에 대한 다수의 연구 결과를 종합적으로 분석하는 핵심 과정이지만, 방대한 문서를 수작업으로 검토·요약하는 데 큰 시간과 비용이 소요됩니다. 본 연구는 최신 대형 언어 모델을 활용해 과학·생물의학 분야 다중 문서를 자동으로 요약하고, 기존 ROUGE 중심 평가의 한계를 보완하기 위해 GEval 및 설명 가능한 평가 방식(ESE)을 결합한 새로운 평가 체계를 제안합니다. Cochrane 기반 대규모 SLR 데이터셋을 활용해 LED-16K와 GPT-4o-mini 모델을 비교 분석했으며, 표면적 유사도와 의미 기반 평가 결과의 차이를 정량적으로 분석함으로써 과학 문서 요약에서 LLM 활용의 가능성과 한계를 함께 제시했습니다.",
       "technologies": [
         {
           "name": "GPT-4o-mini",
@@ -517,11 +517,13 @@
         {
           "id": "intro",
           "title": "주요 내용",
-          "summary": "과학 분야 다중 문서를 자동 요약하고 의미 기반 평가(GEval)를 도입해 기존 지표의 한계를 보완한 연구",
+          "summary": "과학 분야 다중 문서를 대상으로 생성 요약 성능을 비교하고, 의미 기반 평가 및 설명 가능한 평가 체계를 도입한 연구",
           "bullets": [
-            "Cochrane 데이터셋 기반 LED-16K vs GPT-4o-mini 비교",
-            "Lecture Summarizer를 활용한 2단계 추출+생성 요약 파이프라인",
-            "ROUGE/BERTScore/GEval 다각도 평가"
+            "Cochrane SLR 데이터셋(4,528건)을 활용한 대규모 다중 문서 요약 실험",
+            "LED-16K와 GPT-4o-mini 모델의 생성 요약 성능 비교 분석",
+            "Lecture Summarizer 기반 추출 요약 + 생성 요약의 2단계 파이프라인 설계",
+            "ROUGE, BERTScore, GEval을 활용한 표면적·의미 기반 다각도 평가",
+            "GEval 평가 결과의 한계를 보완하기 위한 설명 가능한 평가 방식(ESE) 제안"
           ],
           "images": [
             {
@@ -540,61 +542,65 @@
           "id": "role",
           "title": "담당 역할",
           "bullets": [
-            "연구 주제 선정 및 실험 설계",
-            "Cochrane 문헌 데이터셋 전처리 및 분석",
-            "LED-16K 모델과 GPT-4o-mini 모델 비교 실험 설계",
-            "Lecture Summarizer를 활용한 추출 요약 파이프라인 구축",
-            "다양한 평가 지표(ROUGE, BERTScore, GEval) 적용 및 비교 분석",
-            "평가 지표의 한계 분석 및 개선 방안 제시",
-            "연구 논문 작성 및 결과 정리"
+            "연구 주제 정의 및 과학 분야 SLR 자동화 문제 분석",
+            "Cochrane 기반 다중 문서 요약 데이터셋 전처리 및 실험 환경 구성",
+            "LED-16K 및 GPT-4o-mini 모델 기반 생성 요약 파이프라인 구현",
+            "Lecture Summarizer를 활용한 추출 요약 단계 설계 및 성능 검증",
+            "ROUGE, BERTScore, GEval을 활용한 요약 품질 비교 실험 설계",
+            "GEval 프롬프트 개선 및 평가 방식 고도화",
+            "설명 가능한 요약 평가(ESE) 체계 설계 및 오류 유형 정의",
+            "연구 논문 작성 및 실험 결과 정리"
           ]
-        },
-        {
-          "id": "architecture",
-          "title": "아키텍처",
-          "summary": "LED-16K 기반 문서별 요약 → GPT-4o-mini 종합 요약으로 이어지는 2단계 파이프라인과 GEval 기반 평가 플로우",
-          "images": []
         },
         {
           "id": "achievements",
           "title": "성과",
           "items": [
             {
-              "topic": "GEval 기반 평가 체계 구축",
-              "value": "의미 기반 정성 평가 도입",
+              "topic": "의미 기반 요약 평가 체계 도입",
+              "value": "GEval 기반 평가 신뢰성 향상",
               "description": [
-                "기존 ROUGE, BERTScore 등 표면적 유사성에 의존하는 지표의 한계를 극복하기 위해 LLM 기반의 GEval 평가 방식을 도입했습니다.",
-                "단순 어휘 일치도가 아닌 요약문의 유창성, 일관성, 관련성 등 의미론적 품질을 정량화하여 평가의 신뢰도를 높였습니다."
+                "ROUGE, BERTScore 등 표면적 유사도 중심 평가가 과학 문서 요약의 질을 충분히 반영하지 못한다는 한계를 실험적으로 검증했습니다.",
+                "GEval을 도입해 신뢰성, 완전성, 간결성 관점에서 요약 품질을 평가함으로써 의미 기반 평가의 필요성을 정량적으로 제시했습니다."
               ],
               "images": [
                 {
                   "path": "images/projects/generate_ai_study/result_2.png",
-                  "alt": "평가 결과 2",
-                  "caption": "GEval 비교 결과"
+                  "alt": "GEval 평가 결과",
+                  "caption": "GEval 기반 의미 평가 결과"
                 }
               ]
             },
             {
-              "topic": "GPT-4o-mini 성능 검증",
-              "value": "최고 성능 달성",
+              "topic": "GPT-4o-mini 요약 성능 검증",
+              "value": "GEval 기준 최고 성능 기록",
               "description": [
-                "Cochrane 대규모 데이터셋을 활용한 비교 실험에서 GPT-4o-mini 모델이 GEval 기준 가장 우수한 성능을 기록했습니다.",
-                "기존 LED-16K 모델 대비 문맥 이해도와 정보 압축 능력 면에서 월등한 결과를 보이며, 과학 문서 요약 분야에서의 LLM 활용 가능성을 입증했습니다."
+                "Cochrane SLR 데이터셋 기반 실험에서 GPT-4o-mini가 GEval 기준 LED-16K 대비 월등히 높은 점수를 기록했습니다.",
+                "과학 문서 요약에서 LLM이 맥락 이해와 핵심 정보 통합에 강점을 가짐을 실증적으로 확인했습니다."
               ],
               "images": [
                 {
                   "path": "images/projects/generate_ai_study/result_1.png",
-                  "alt": "평가 결과 1",
-                  "caption": "ROUGE/BERTScore 비교 결과"
+                  "alt": "모델별 성능 비교",
+                  "caption": "ROUGE / BERTScore 비교 결과"
                 }
               ]
             },
             {
-              "topic": "2단계 요약 파이프라인",
-              "value": "입력 길이 제한 극복",
+              "topic": "입력 길이 제약 극복 파이프라인",
+              "value": "다중 문서 요약 구조 제안",
               "description": [
-                "논문의 긴 텍스트를 처리하기 위해 '개별 문서 요약(Extraction/Abstraction)' 후 '종합 요약(Synthesis)'으로 이어지는 2단계 파이프라인을 설계했습니다.",
-                "이를 통해 LLM의 입력 토큰 제한 문제를 해결하면서도 다중 문서의 핵심 정보를 빠짐없이 통합하는 효과적인 구조를 제시했습니다."
+                "긴 입력 토큰 제약을 극복하기 위해 추출 요약 후 생성 요약으로 이어지는 2단계 요약 파이프라인을 설계했습니다.",
+                "이를 통해 대규모 문서 집합에서도 핵심 정보를 누락 없이 통합할 수 있는 구조를 제시했습니다."
+              ],
+              "images": []
+            },
+            {
+              "topic": "설명 가능한 요약 평가(ESE) 제안",
+              "value": "오류 기반 평가 체계 구축",
+              "description": [
+                "기존 GEval이 점수만 제공하고 근거 설명이 부족하다는 한계를 보완하기 위해 ESE(Explainable Summary Evaluation)를 설계했습니다.",
+                "요약 오류를 신뢰성, 완전성, 간결성 관점에서 세분화하고, 오류 위치와 원인을 함께 출력함으로써 평가 결과의 해석 가능성을 크게 향상시켰습니다."
               ],
               "images": []
             }
@@ -606,12 +612,6 @@
           "name": "과학 분야 다중 문서 요약을 위한 개선된 요약 및 평가 방안 연구",
           "path": "files/projects/generate_ai_study/과학 분야 다중 문서 요약을 위한 개선된 요약 및 평가 방안 연구.pdf",
           "type": "pdf"
-        }
-      ],
-      "links": [
-        {
-          "name": "논문",
-          "url": "#"
         }
       ]
     }
