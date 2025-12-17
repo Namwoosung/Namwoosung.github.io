@@ -309,10 +309,10 @@
     {
       "id": "ws-research",
       "title": "WebSocket 서버 성능 비교 연구",
-      "period": "2023.09 - 2024.02",
+      "period": "2025.03 - 2025.06",
       "team": "개인 연구 프로젝트",
       "description": "Spring, Node.js, FastAPI 기반 WebSocket 서버의 구조적 차이에 따른 성능을 정량적으로 비교한 연구",
-      "overview": "실시간 협업 시스템에서 WebSocket 서버의 성능은 전체 시스템의 품질을 결정하는 핵심 요소입니다. 본 연구는 Spring WebSocket, Spring STOMP, Node.js, FastAPI 등 다양한 프레임워크를 동일한 조건에서 구현하고, 대규모 사용자 환경에서의 성능을 정량적으로 비교 분석하여 실시간 시스템 구축 시 최적의 프레임워크 선택 기준을 제시합니다.",
+      "overview": "실시간 협업 서비스에서는 사용자 입력을 낮은 지연으로 동기화하고, 다수 사용자에게 이벤트를 안정적으로 브로드캐스트하는 능력이 핵심 품질을 결정합니다. 본 연구는 전자칠판(실시간 동기화·이벤트 전파가 반복적으로 발생하는 협업 도메인)을 응용 사례로 설정하고, Spring WebSocket, Spring STOMP, Node.js(ws), FastAPI(WebSocket) 기반 서버를 동일한 메시지 포맷과 부하 시나리오로 구현한 뒤 정량 지표를 기반으로 비교·분석했습니다. k6로 동시 접속 부하를 단계적으로 확장하며 TPS, RTT, 메시지 손실률, 서버 자원 사용량(CPU/메모리/네트워크)을 수집했고, Grafana + VictoriaMetrics 기반 대시보드로 실험 중 실시간 모니터링이 가능하도록 구성했습니다.",
       "technologies": [
         {
           "name": "Java (Spring WebSocket / STOMP)",
@@ -335,7 +335,15 @@
           "level": "primary"
         },
         {
-          "name": "Grafana / VictoriaMetrics",
+          "name": "VictoriaMetrics",
+          "level": "secondary"
+        },
+        {
+          "name": "cAdvisor",
+          "level": "secondary"
+        },
+        {
+          "name": "Grafana",
           "level": "secondary"
         }
       ],
@@ -343,22 +351,19 @@
         {
           "id": "intro",
           "title": "주요 내용",
-          "summary": "Spring, Node.js, FastAPI 기반 WebSocket 서버를 동일 조건에서 구현·측정해 구조 차이에 따른 성능을 정량 비교한 연구",
+          "summary": "전자칠판 실시간 동기화 시나리오를 기준으로 WebSocket 서버를 동일 조건에서 구현·측정하고, 프레임워크 구조 차이가 TPS/지연/신뢰성에 미치는 영향을 정량 비교한 연구",
           "bullets": [
-            "AWS EC2 + k6로 100~1000명 동시 접속 부하 테스트",
-            "RTT/TPS/손실률 등 핵심 지표 정량 수집 및 분석",
-            "멀티 워커, Redis Pub/Sub 등 확장 전략 실험"
+            "AWS EC2 환경에서 k6 부하 테스트로 100~1000명 동시 접속을 단계적으로 확장하며 성능 측정",
+            "TPS, RTT(p95/p99 포함), 메시지 손실률, CPU/메모리/네트워크 사용량을 통합 수집해 프레임워크별 병목 구간을 정량화",
+            "Grafana + VictoriaMetrics + cAdvisor 기반 모니터링 파이프라인을 구성해 실험 중 지표를 실시간 시각화",
+            "Spring(WebSocket/STOMP)과 Node.js/FastAPI의 처리 모델(멀티스레드 vs 이벤트 루프)을 지표 변화와 매핑하여 원인 중심으로 해석",
+            "Node.js(cluster) / FastAPI(uvicorn workers) 및 Redis Pub/Sub 기반 워커 동기화 실험으로 확장 전략의 효과와 오버헤드를 검증"
           ],
           "images": [
             {
               "path": "images/projects/websocket_study/spring_pure_temp.png",
               "alt": "Spring WebSocket 성능 결과",
               "caption": "Spring WebSocket 성능 측정 예시"
-            },
-            {
-              "path": "images/projects/websocket_study/node_pure_temp.png",
-              "alt": "Node.js WebSocket 성능 결과",
-              "caption": "Node.js 성능 측정 예시"
             }
           ]
         },
@@ -366,13 +371,12 @@
           "id": "role",
           "title": "담당 역할",
           "bullets": [
-            "연구 주제 선정 및 실험 설계",
-            "4가지 WebSocket 서버 프레임워크 구현 (Spring WebSocket, Spring STOMP, Node.js, FastAPI)",
-            "k6를 활용한 부하 테스트 시나리오 작성 및 실행",
-            "성능 지표 수집 시스템 구축 (Grafana + VictoriaMetrics)",
-            "실험 결과 분석 및 프레임워크별 구조적 차이 분석",
-            "최적화 전략 실험 (멀티 워커, Redis Pub/Sub 등)",
-            "연구 보고서 작성 및 결과 정리"
+            "전자칠판 실시간 동기화 도메인을 가정해 메시지 포맷, 브로드캐스트 규칙, 부하 단계(100→1000 VU)로 구성된 실험 시나리오를 설계",
+            "Spring WebSocket, Spring STOMP, Node.js(ws), FastAPI(WebSocket) 기반 서버를 동일 기능/동일 조건으로 구현하여 비교 가능성을 확보",
+            "k6 스크립트를 작성해 연결, 주기적 메시지 전송, 그룹 브로드캐스트 수신을 자동화하고 반복 실험이 가능한 형태로 구성",
+            "VictoriaMetrics(시계열 저장) + Grafana(대시보드) + cAdvisor(컨테이너 자원 지표)로 클라이언트/서버 메트릭을 통합 수집하는 측정 파이프라인 구축",
+            "Node.js(cluster) / FastAPI(uvicorn workers) 멀티 워커 확장과 Redis Pub/Sub 동기화 구조를 적용해 최적화 실험을 수행하고 병목 원인을 분석",
+            "지표 변화(TPS/RTT/손실률/자원 사용량)를 기반으로 프레임워크별 구조적 한계와 확장 설계 시 트레이드오프를 정리해 연구 보고서로 문서화"
           ]
         },
         {
@@ -390,67 +394,84 @@
         {
           "id": "achievements",
           "title": "성과",
-          "bullets": [
-            "최대 1,000명 동시 접속까지 실험하여 안정성 비교",
-            "Spring: 손실률 < 1%로 고부하에서도 안정적",
-            "Node.js: 500명 이후 지연 증가 특성 정량화",
-            "FastAPI: 500명 이상에서 세션 유지 실패 및 손실률 증가 확인",
-            "스레드/이벤트 루프 구조와 성능 지표를 매핑해 해석",
-            "멀티 워커·Redis Pub/Sub 적용 시 오버헤드 영향 확인",
-            "실시간 협업 시스템 구축 시 프레임워크 선택 기준 제시"
-          ],
-          "metrics": [
+          "items": [
             {
-              "metric": "테스트 규모",
-              "value": "최대 1,000명 동시 접속 시뮬레이션",
-              "type": "scale"
+              "topic": "대규모 부하 테스트 수행",
+              "value": "1,000명 동시 접속 시뮬레이션",
+              "description": [
+                "AWS EC2 환경에서 k6를 활용해 최대 1,000명의 동시 사용자가 실시간으로 메시지를 송수신하는 부하 테스트를 단계적으로 수행했습니다.",
+                "단순 연결 유지가 아닌 주기적 메시지 전송과 그룹 브로드캐스트 시나리오를 적용해 전자칠판과 같은 실시간 협업 서비스 환경을 현실적으로 재현했습니다."
+              ],
+              "images": []
             },
             {
-              "metric": "Spring 성능",
-              "value": "1,000명 환경에서도 안정적 (손실률 < 1%)",
-              "type": "performance"
+              "topic": "Spring WebSocket 안정성 검증",
+              "value": "손실률 1% 미만 유지",
+              "description": [
+                "Spring WebSocket 및 Spring STOMP는 멀티스레드 기반 처리 구조로 고부하 상황에서도 메시지 손실률을 1% 미만으로 유지했습니다.",
+                "CPU 사용량이 증가하는 환경에서도 RTT와 TPS가 비교적 안정적으로 유지되어 대규모 실시간 동기화 서비스에 적합함을 정량적으로 확인했습니다."
+              ],
+              "images": [
+                {
+                  "path": "images/projects/websocket_study/spring_pure_temp.png",
+                  "alt": "Spring WebSocket 성능",
+                  "caption": "Spring WebSocket 성능 측정 결과"
+                },
+                {
+                  "path": "images/projects/websocket_study/spring_stomp_temp.png",
+                  "alt": "Spring STOMP 성능",
+                  "caption": "Spring STOMP 성능 측정 결과"
+                }
+              ]
             },
             {
-              "metric": "Node.js 성능",
-              "value": "500명까지 효율적, 이후 지연 증가",
-              "type": "performance"
+              "topic": "Node.js / FastAPI 성능 특성 분석",
+              "value": "500명 규모까지 효율적 처리",
+              "description": [
+                "Node.js(ws)와 FastAPI(WebSocket)는 이벤트 루프 기반 비동기 처리 구조로 500명 이하의 동시 접속 환경에서 낮은 자원 사용량과 빠른 응답 속도를 보였습니다.",
+                "500명을 초과하는 고부하 구간에서는 이벤트 루프 병목으로 인해 지연 시간이 급격히 증가하고 메시지 손실이 발생하는 한계를 실험적으로 확인했습니다."
+              ],
+              "images": [
+                {
+                  "path": "images/projects/websocket_study/node_pure_temp.png",
+                  "alt": "Node.js WebSocket 성능",
+                  "caption": "Node.js WebSocket 성능 측정 결과"
+                },
+                {
+                  "path": "images/projects/websocket_study/fastapi_pure_temp.png",
+                  "alt": "FastAPI WebSocket 성능",
+                  "caption": "FastAPI WebSocket 성능 측정 결과"
+                }
+              ]
             },
             {
-              "metric": "연구 완성도",
-              "value": "정량적 비교 및 구조적 분석 완료",
-              "type": "quality"
-            }
-          ],
-          "images": [
-            {
-              "path": "images/projects/websocket_study/spring_pure_temp.png",
-              "alt": "Spring WebSocket 성능",
-              "caption": "Spring WebSocket 성능 측정 결과"
+              "topic": "확장 전략 및 병목 원인 검증",
+              "value": "멀티 워커·Redis Pub/Sub 한계 도출",
+              "description": [
+                "Node.js(cluster) 및 FastAPI(uvicorn workers) 기반 멀티 워커 확장과 Redis Pub/Sub 구조를 적용해 성능 개선 효과를 실험했습니다.",
+                "워커 간 메시지 동기화 과정에서 Redis 처리 지연과 메시지 복제 오버헤드가 새로운 병목으로 작용할 수 있음을 지표 기반으로 확인했습니다."
+              ],
+              "images": [
+                {
+                  "path": "images/projects/websocket_study/node_pure_opt_temp.png",
+                  "alt": "Node.js 멀티워커 최적화 성능",
+                  "caption": "Node.js 멀티워커 최적화 결과"
+                },
+                {
+                  "path": "images/projects/websocket_study/fastapi_opt_temp.png",
+                  "alt": "FastAPI 최적화 성능",
+                  "caption": "FastAPI 최적화 결과"
+                }
+              ]
             },
             {
-              "path": "images/projects/websocket_study/spring_stomp_temp.png",
-              "alt": "Spring STOMP 성능",
-              "caption": "Spring STOMP 성능 측정 결과"
-            },
-            {
-              "path": "images/projects/websocket_study/node_pure_temp.png",
-              "alt": "Node.js WebSocket 성능",
-              "caption": "Node.js WebSocket 성능 측정 결과"
-            },
-            {
-              "path": "images/projects/websocket_study/node_pure_opt_temp.png",
-              "alt": "Node.js 최적화 성능",
-              "caption": "Node.js 멀티워커 최적화 결과"
-            },
-            {
-              "path": "images/projects/websocket_study/fastapi_pure_temp.png",
-              "alt": "FastAPI WebSocket 성능",
-              "caption": "FastAPI WebSocket 성능 측정 결과"
-            },
-            {
-              "path": "images/projects/websocket_study/fastapi_opt_temp.png",
-              "alt": "FastAPI 최적화 성능",
-              "caption": "FastAPI 최적화 결과"
+              "topic": "연구 결과의 실무 적용",
+              "value": "페이텍코리아 전자칠판 개발 참고자료 활용",
+              "description": [
+                "본 연구 결과를 페이텍코리아 전자칠판 개발 시 참고 자료로 제공해 실시간 동기화 서버 구조 및 프레임워크 선택 검토에 활용되었습니다.",
+                "프레임워크별 처리 모델과 성능 특성 분석 결과가 실제 제품 설계 단계에서 기술적 의사결정을 지원하는 근거 자료로 사용되었습니다."
+              ],
+              "images": []
             }
           ]
         }
@@ -460,12 +481,6 @@
           "name": "WebSocket 서버 성능 비교 연구",
           "path": "files/projects/websocket_study/WebSocket 서버 성능 비교 연구.pdf",
           "type": "pdf"
-        }
-      ],
-      "links": [
-        {
-          "name": "연구 보고서",
-          "url": "#"
         }
       ]
     },
@@ -543,34 +558,45 @@
         {
           "id": "achievements",
           "title": "성과",
-          "bullets": [
-            "GEval 도입으로 의미 기반 평가 체계 구축",
-            "GPT-4o-mini가 GEval 기준 최고 성능 달성",
-            "Cochrane 대규모 실험으로 결과 신뢰성 확보",
-            "표면적 유사성 중심 지표의 한계를 실증하고 대안 제시",
-            "긴 입력 제약을 파이프라인 설계로 우회해 성능 비교 수행",
-            "연구 논문과 평가 코드/자료를 정리해 공유"
-          ],
-          "metrics": [
+          "items": [
             {
-              "metric": "평가 지표 개선",
-              "value": "GEval을 통한 의미적 평가 도입",
-              "type": "methodology"
+              "topic": "GEval 기반 평가 체계 구축",
+              "value": "의미 기반 정성 평가 도입",
+              "description": [
+                "기존 ROUGE, BERTScore 등 표면적 유사성에 의존하는 지표의 한계를 극복하기 위해 LLM 기반의 GEval 평가 방식을 도입했습니다.",
+                "단순 어휘 일치도가 아닌 요약문의 유창성, 일관성, 관련성 등 의미론적 품질을 정량화하여 평가의 신뢰도를 높였습니다."
+              ],
+              "images": [
+                {
+                  "path": "images/projects/generate_ai_study/result_2.png",
+                  "alt": "평가 결과 2",
+                  "caption": "GEval 비교 결과"
+                }
+              ]
             },
             {
-              "metric": "GPT-4o-mini 성능",
-              "value": "GEval 기준 최고 성능 달성",
-              "type": "quality"
+              "topic": "GPT-4o-mini 성능 검증",
+              "value": "최고 성능 달성",
+              "description": [
+                "Cochrane 대규모 데이터셋을 활용한 비교 실험에서 GPT-4o-mini 모델이 GEval 기준 가장 우수한 성능을 기록했습니다.",
+                "기존 LED-16K 모델 대비 문맥 이해도와 정보 압축 능력 면에서 월등한 결과를 보이며, 과학 문서 요약 분야에서의 LLM 활용 가능성을 입증했습니다."
+              ],
+              "images": [
+                {
+                  "path": "images/projects/generate_ai_study/result_1.png",
+                  "alt": "평가 결과 1",
+                  "caption": "ROUGE/BERTScore 비교 결과"
+                }
+              ]
             },
             {
-              "metric": "데이터셋 규모",
-              "value": "Cochrane 데이터셋 기반 대규모 실험",
-              "type": "scale"
-            },
-            {
-              "metric": "연구 완성도",
-              "value": "논문 작성 및 발표 완료",
-              "type": "publication"
+              "topic": "2단계 요약 파이프라인",
+              "value": "입력 길이 제한 극복",
+              "description": [
+                "논문의 긴 텍스트를 처리하기 위해 '개별 문서 요약(Extraction/Abstraction)' 후 '종합 요약(Synthesis)'으로 이어지는 2단계 파이프라인을 설계했습니다.",
+                "이를 통해 LLM의 입력 토큰 제한 문제를 해결하면서도 다중 문서의 핵심 정보를 빠짐없이 통합하는 효과적인 구조를 제시했습니다."
+              ],
+              "images": []
             }
           ]
         }
