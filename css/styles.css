@@ -945,12 +945,12 @@ body {
 
 /* Section Titles */
 .section-title-main {
-  color: var(--accent-color);
-  margin-bottom: 1.5rem;
-  font-size: 1.5rem;
-  font-weight: 700;
-  padding-bottom: 0.75rem;
-  border-bottom: 3px solid rgba(91, 163, 255, 0.3);
+  color: #1e293b;
+  margin-bottom: 1.25rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+  padding-bottom: 0;
+  border-bottom: none;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -965,11 +965,8 @@ body {
 
 /* Project Overview */
 .project-overview-section {
-  margin-bottom: 3rem;
-  padding: 2rem;
-  background: linear-gradient(135deg, rgba(91, 163, 255, 0.05) 0%, rgba(74, 158, 255, 0.02) 100%);
-  border-radius: 16px;
-  border-left: 4px solid var(--accent-color);
+  margin-bottom: 2.5rem;
+  padding: 0;
 }
 
 .overview-text {
@@ -1172,18 +1169,18 @@ body {
 }
 
 .organic-section {
-  padding: 2.5rem 0;
-  border-bottom: 1px solid rgba(91, 163, 255, 0.1);
+  padding: 2rem 0;
+  margin-bottom: 2.5rem;
 }
 
 .organic-section:last-child {
-  border-bottom: none;
+  margin-bottom: 0;
 }
 
 .organic-section.has-images {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 3rem;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 3.5rem;
   align-items: start;
 }
 
@@ -1191,6 +1188,10 @@ body {
   .organic-section.has-images {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+  
+  .organic-section.has-images .section-image-wrapper {
+    order: -1;
   }
 }
 
@@ -1202,15 +1203,17 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.55rem;
+  margin-bottom: 1rem;
 }
 
 .detail-section .section-title-main {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.5rem;
+  color: #1e293b;
+  font-weight: 600;
 }
 
 .detail-section-body {
@@ -1245,11 +1248,7 @@ body {
 }
 
 .detail-metric-card {
-  background: rgba(91, 163, 255, 0.06);
-  border: 1px solid rgba(91, 163, 255, 0.14);
-  border-radius: 12px;
-  padding: 0.8rem 0.9rem;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  padding: 0.8rem 0;
 }
 
 .detail-metric-card .metric-label {
@@ -1264,46 +1263,53 @@ body {
   font-weight: 500;
 }
 
+.section-image-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
 .detail-images {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 1.5rem;
   align-items: flex-start;
+  width: 100%;
 }
 
 .detail-image-card {
   background: transparent;
-  width: auto;
+  width: 100%;
   max-width: 100%;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease;
+  border-radius: 4px;
+  overflow: visible;
+  transition: opacity 0.2s ease;
 }
 
 .detail-image-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  opacity: 0.85;
 }
 
 .detail-image {
-  width: auto;
+  width: 100%;
   max-width: 100%;
   height: auto;
-  max-height: 400px;
+  max-height: 380px;
   object-fit: contain;
-  background: #f8fafc;
+  background: #fafbfc;
   cursor: zoom-in;
   display: block;
+  border-radius: 4px;
 }
 
 .detail-image-caption {
-  margin: 0;
-  padding: 0.6rem 0.8rem;
-  font-size: 0.9rem;
-  color: #475569;
-  background: white;
-  border-top: 1px solid rgba(0, 0, 0, 0.04);
+  margin: 0.5rem 0 0 0;
+  padding: 0;
+  font-size: 0.85rem;
+  color: #64748b;
+  background: transparent;
+  text-align: center;
 }
 
 /* Project Sections */

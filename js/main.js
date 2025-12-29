@@ -212,9 +212,26 @@ function buildDetailSection(projectId, section, sectionIndex) {
   // Organic layout: Text on left, Images on right (if images exist)
   const hasImages = section.images && section.images.length > 0;
 
+  if (hasImages) {
+    return `
+      <div class="organic-section has-images" data-section="${section.id || sectionIndex}">
+        <div class="section-content-wrapper">
+          <div class="detail-section-header">
+            <h3 class="section-title-main">${section.title || ""}</h3>
+          </div>
+          <div class="detail-section-body">
+            ${summary}
+            ${metrics}
+            ${bullets}
+          </div>
+        </div>
+        ${images}
+      </div>
+    `;
+  }
+
   return `
-    <div class="organic-section ${hasImages ? "has-images" : ""
-    }" data-section="${section.id || sectionIndex}">
+    <div class="organic-section" data-section="${section.id || sectionIndex}">
       <div class="section-content-wrapper">
         <div class="detail-section-header">
           <h3 class="section-title-main">${section.title || ""}</h3>
@@ -225,7 +242,6 @@ function buildDetailSection(projectId, section, sectionIndex) {
           ${bullets}
         </div>
       </div>
-      ${images}
     </div>
   `;
 }
@@ -299,13 +315,13 @@ async function openProjectModal(projectId) {
                     </div>
                 </div>
 
-                ${architectureSection
-      ? buildDetailSection(projectId, architectureSection, 1)
+                ${roleSection
+      ? buildDetailSection(projectId, roleSection, 1)
       : ""
     }
                 
-                ${roleSection
-      ? buildDetailSection(projectId, roleSection, 2)
+                ${architectureSection
+      ? buildDetailSection(projectId, architectureSection, 2)
       : ""
     }
 
